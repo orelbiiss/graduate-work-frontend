@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import SidePanel from './SideBar.js';
 import '../Header.css';
 import { CartContext } from '../layouts/CartContext.js';
@@ -17,6 +17,7 @@ function Header() {
 
   const { cart } = useContext(CartContext);
   const { setLoginWindowOpen } = useContext(CartContext);
+  const { LinkWithScrollToTop } = useContext(CartContext)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -47,19 +48,19 @@ function Header() {
       </div>
       <ul className="navigation__links">
         <li className="hdr__text">
-          <Link to="/catalog">Напитки</Link>
+          <LinkWithScrollToTop to="/catalog">Напитки</LinkWithScrollToTop>
         </li>
         <li className="hdr__text">
-          <Link to="/sale">Акции</Link>
+          <LinkWithScrollToTop to="/sale">Акции</LinkWithScrollToTop>
         </li>
-        <Link to="/">
+        <LinkWithScrollToTop to="/">
           <img className="logo" src='/img/logo.svg' alt="Лого" title='logo' />
-        </Link>
+        </LinkWithScrollToTop>
         <li className="hdr__text">
-          <Link to="/aboutUs">О нас</Link>
+          <LinkWithScrollToTop to="/aboutUs">О нас</LinkWithScrollToTop>
         </li>
         <li className="hdr__text">
-          <Link to="/contact">Контакты</Link>
+          <LinkWithScrollToTop to="/contact">Контакты</LinkWithScrollToTop>
         </li>
       </ul>
       <div className="basket__menu__icons">
@@ -83,10 +84,10 @@ function Header() {
         {isMenuOpen ? 
           <div  className='burger__links'>
             <div className='links'>
-              <Link to="/catalog">Напитки</Link>
-              <Link to="/sale">Акции</Link>
-              <Link to="/aboutUs">О нас</Link>
-              <Link to="/contact">Контакты</Link>
+              <LinkWithScrollToTop to="/catalog">Напитки</LinkWithScrollToTop>
+              <LinkWithScrollToTop to="/sale">Акции</LinkWithScrollToTop>
+              <LinkWithScrollToTop to="/aboutUs">О нас</LinkWithScrollToTop>
+              <LinkWithScrollToTop to="/contact">Контакты</LinkWithScrollToTop>
             </div>
             <div className="social__media__icons__footer">
               <a href="https://web.telegram.org/a/">

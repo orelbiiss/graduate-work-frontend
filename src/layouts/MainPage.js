@@ -19,6 +19,7 @@ function MainPage() {
 }
 
 function Main({ addToCart }){
+  const { LinkWithScrollToTop } = useContext(CartContext)
   return(
     <main className="oblast">
       <section className="first__section">
@@ -37,19 +38,19 @@ function Main({ addToCart }){
           </p>
         </div>
         <div className="button">
-          <a className="sale" href="/sale">
+          <LinkWithScrollToTop className="sale" to="/sale">
             АКЦИИ
-          </a>
-          <a className="beverages" href="/catalog">
+          </LinkWithScrollToTop>
+          <LinkWithScrollToTop className="beverages" to="/catalog">
             НАПИТКИ
-          </a>
+          </LinkWithScrollToTop>
         </div>
-        <a className="beverages" href="/catalog">
+        <LinkWithScrollToTop className="beverages" to="/catalog">
           НАПИТКИ
-        </a>
-        <a className="sale" href="/sale">
+        </LinkWithScrollToTop>
+        <LinkWithScrollToTop className="sale" to="/sale">
           АКЦИИ
-        </a>
+        </LinkWithScrollToTop>
       </section>
       <section className="second__section">
         <div className='product__1024px'>
