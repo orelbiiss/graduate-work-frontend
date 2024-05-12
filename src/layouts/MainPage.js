@@ -8,6 +8,7 @@ import { CartContext } from './CartContext';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 
 function MainPage() {
     return (
@@ -19,7 +20,6 @@ function MainPage() {
 }
 
 function Main({ addToCart }){
-  const { LinkWithScrollToTop } = useContext(CartContext)
   return(
     <main className="oblast">
       <section className="first__section">
@@ -38,19 +38,19 @@ function Main({ addToCart }){
           </p>
         </div>
         <div className="button">
-          <LinkWithScrollToTop className="sale" to="/sale">
+          <Link className="sale" to="/sale">
             АКЦИИ
-          </LinkWithScrollToTop>
-          <LinkWithScrollToTop className="beverages" to="/catalog">
+          </Link>
+          <Link className="beverages" to="/catalog">
             НАПИТКИ
-          </LinkWithScrollToTop>
+          </Link>
         </div>
-        <LinkWithScrollToTop className="beverages" to="/catalog">
+        <Link className="beverages" to="/catalog">
           НАПИТКИ
-        </LinkWithScrollToTop>
-        <LinkWithScrollToTop className="sale" to="/sale">
+        </Link>
+        <Link className="sale" to="/sale">
           АКЦИИ
-        </LinkWithScrollToTop>
+        </Link>
       </section>
       <section className="second__section">
         <div className='product__1024px'>

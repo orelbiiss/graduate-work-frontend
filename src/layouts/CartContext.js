@@ -1,5 +1,4 @@
 import { useEffect, createContext, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 export const CartContext = createContext();
 
@@ -39,23 +38,9 @@ function CartContextProvider({ children }) {
             setCart(updatedCart);
           }
     }
-
-    function ScrollToTop() {
-      const { pathname } = useLocation();
-    
-      useEffect(() => {
-        window.scrollTo(0, 0);
-      }, [pathname]);
-    
-      return null;
-    }
-    
-    const LinkWithScrollToTop = ({...props }) => (
-      <Link {...props} onClick={ScrollToTop} />
-    );
  
     return (
-        <CartContext.Provider value={{ cart, setCart, addToCart, isLoginWindowOpen, setLoginWindowOpen, LinkWithScrollToTop}} >
+        <CartContext.Provider value={{ cart, setCart, addToCart, isLoginWindowOpen, setLoginWindowOpen}} >
             { children }
         </CartContext.Provider>
     )
