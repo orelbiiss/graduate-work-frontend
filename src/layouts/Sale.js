@@ -3,9 +3,7 @@ import Footer from '../components/Footer';
 import UpBtn from '../components/UpBtn';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-import '../SalePage.css';
+import '../css/SalePage.css';
 
 
 function Sale(){
@@ -84,7 +82,7 @@ function RemainingPromotions() {
         return (
             <>
                 <div className={`promotion__${i}`} key={i}>
-                    <img src={elem.srcImg} className="promotion__img"/> 
+                    <img src={elem.srcImg} className="promotion__img" alt=""/> 
                     <div className="promotion__details">
                         <p className="promotion__text">{elem.text}</p>
                         <p className="promotion__deadline">Сроки проведения {elem.deadline}</p>
@@ -185,7 +183,7 @@ function SetDrinks(){
                 </div>
                 <div>
                     <div className="set__price">
-                        <img src="/img/wallet.svg"></img>
+                        <img src="/img/wallet.svg" alt=""></img>
                         <p>{elem.setPrice} ₽</p>
                     </div>
                     <div className="border__description"></div>
@@ -213,13 +211,13 @@ function SetDrinks(){
                 <div className="set__btn__container">
                     <a className="btn__more">Подробнее</a>
                     <div className="btn__basket">
-                        <img  className="icon" src='/img/add__to__basket.svg'></img>
+                        <img  className="icon" src='/img/add__to__basket.svg' alt=""></img>
                     </div>
                 </div>
             </div>
 
             <div className='set__picture'>
-                <img src="/img/set__drinks.png"></img>
+                <img src="/img/set__drinks.png" alt=""></img>
             </div>
         </div>
     </>

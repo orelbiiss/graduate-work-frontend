@@ -1,0 +1,168 @@
+.registration__container{
+    width: 60%;
+    margin: auto;
+}
+
+.registration__title {
+    font-family: TildaSansSemibold;
+    line-height: 100%;
+    font-size: 35px;
+}
+
+.registration__text {
+    margin: 20px 0 20px;
+    font-size: 16px;
+    font-family: TildaSansLight;
+}
+
+.loginRegisterChoice{
+    font-family: TildaSansRegular;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.personal__info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login,
+.register {
+    cursor: pointer;
+}
+
+.login:hover,
+.register:hover {
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.register-active,
+.login-active{
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.main__input__container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input__container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+
+}
+
+#email, #password, #phone, #birth__date,
+#lastname, #name, #patronymic, #confirm__password {
+    font-family: TildaSansRegular;
+    font-size: 18px;
+    padding: 15px 15px 10px 0 ;
+    outline: 0;
+    border: 0;
+    border-bottom: 0.5px solid #7F7F7F;
+}
+
+.section__description{
+    font-family: TildaSansSemiBold;
+    font-size: 22px;
+    margin: 20px 0 10px;
+}
+
+.radio{
+    display: flex;
+    gap: 20px;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.radio__choice{
+    font-family: TildaSansRegular;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.necessarily {
+    width: 10px;
+    position: absolute;
+    left: -20px;
+    top: 50%;
+}
+
+input#female,
+input#male{
+    border-radius: 100px;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+} 
+
+input#female + .label__reg::before,
+input#male + .label__reg::before{
+    content: '';
+    display: inline-block;
+    padding: 5px;
+    border-radius: 100px ;
+    border: 1px solid var(--accent-color);
+    margin-right: 10px;
+} 
+
+input#female:checked+.label__reg::before,
+input#male:checked+.label__reg::before{
+    box-shadow: 0px 0px 0px 3px var(--accent-color) inset;
+} 
+
+
+/* Стиль для общего сообщения об ошибке */
+.form-error-message {
+    color: #d32f2f;
+    background-color: #fde8e8;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #ef9a9a;
+    font-size: 14px;
+  }
+  
+  /* Стиль для подсветки незаполненных полей */
+  .input-error {
+    border-color: #d32f2f !important;
+  }
+  
+  .field-error {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+
+@media screen and (max-width: 1100px) {
+    .registration__container{
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 595px) {
+    .registration__container{
+
+        width: 85%;
+    }
+}

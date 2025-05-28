@@ -5,10 +5,7 @@ export const catalog = [
       cards: [
         {
           name: "Zer0P Вода негазированная 1",
-          imgSrc1x: "/img/middle__water.png",
-          imgSrc2x: "/img/2x/middle__water__2x.png",
-          webpSrc1x: "/img/webp/middle__water.webp",
-          webpSrc2x: "/img/webp/middle__water__2x.webp",
+          imgSrc: "/img/middle__water.png",
           volumes: [500, 1000, 1500],
           prices: [100, 150, 200],
           ingredients: "",
@@ -18,10 +15,7 @@ export const catalog = [
         },
         {
           name: "Zer0P Вода",
-          imgSrc1x: "/img/middle__water.png",
-          imgSrc2x: "/img/2x/middle__water__2x.png",
-          webpSrc1x: "/img/webp/middle__water.webp",
-          webpSrc2x: "/img/webp/middle__water__2x.webp",
+          imgSrc: "/img/middle__water.png",
           volumes: [500, 1000, 1500],
           prices: [100, 150, 200],
           ingredients: "",
@@ -30,10 +24,7 @@ export const catalog = [
         },
         {
           name: "Напиток LEGEND OF BAIKAL Лайм негазированный",
-          imgSrc1x: "/img/1sw3p.png",
-          imgSrc2x: "/img/2x/1sw3p__2x.png",
-          webpSrc1x: "/img/1sw3p.png",
-          webpSrc2x: "/img/2x/1sw3p__2x.png",
+          imgSrc: "/img/1sw3p.png",
           volumes: [330],
           prices: [129],
           ingredients: "Вода подготовленная, регулятор кислотности кислота лимонная, ароматизатор натуральный «Лайм», подсластитель сукралоза, премикс витаминный (ниацин, пантотеновая кислота, Витамин В6, витамин В1, биотин).",
@@ -42,7 +33,7 @@ export const catalog = [
         },
         {
           name: "Foco Кокосовая вода",
-          imgSrc1x: "/img/foco__coconut__water.png",
+          imgSrc: "/img/foco__coconut__water.png",
           imgSrc2x: "/img/2x/foco__coconut__water__2x.png",
           webpSrc1x: "/img/webp/foco__coconut__water.webp",
           webpSrc2x: "/img/webp/foco__coconut__water__2x.webp",
@@ -60,7 +51,7 @@ export const catalog = [
       cards: [
         {
           name: "CОК АПЕЛЬСИНОВЫЙ СВЕЖЕВЫЖАТЫЙ",
-          imgSrc1x: "/img/2sj1i.png",
+          imgSrc: "/img/2sj1i.png",
           imgSrc2x: "/img/2x/2sj1i__2x.png",
           webpSrc1x: "/img/webp/2sj1i.webp",
           webpSrc2x: "/img/webp/2sj1i__2x.webp",
@@ -72,7 +63,7 @@ export const catalog = [
         },
         {
           name: "СОК ВИШНЕВЫЙ СВЕЖЕВЫЖАТЫЙ",
-          imgSrc1x: "/img/2sj2i.png",
+          imgSrc: "/img/2sj2i.png",
           imgSrc2x: "/img/2x/2sj2i__2x.png",
           webpSrc1x: "/img/webp/2sj2i.webp",
           webpSrc2x: "/img/webp/2sj2i__2x.webp",
@@ -84,7 +75,7 @@ export const catalog = [
         },
         {
           name: "ITO NOEN СОК ЮДЗУ 100%я",
-          imgSrc1x: "/img/2sj3i.png",
+          imgSrc: "/img/2sj3i.png",
           imgSrc2x: "/img/2x/2sj3i__2x.png",
           webpSrc1x: "/img/webp/2sj3i.webp",
           webpSrc2x: "/img/webp/2sj3i__2x.webp",
@@ -96,7 +87,7 @@ export const catalog = [
         },
         {
           name: "СОК ХОЛОДНОГО ОТЖИМА CITRUS 3",
-          imgSrc1x: "/img/2sj4i.png",
+          imgSrc: "/img/2sj4i.png",
           imgSrc2x: "/img/2x/2sj4i__2x.png",
           webpSrc1x: "/img/webp/2sj4i.webp",
           webpSrc2x: "/img/webp/2sj4i__2x.webp",
@@ -105,7 +96,7 @@ export const catalog = [
           ingredients: "грейпфрут свежий, мята свежая",
           quantity: 3,
           id: "2sj4p",
-          productDescription: "Citrus – соки богаты витамином С, стимулируют обмен веществ и мобилизуют силы.",
+          productDescription: "Citrus – соки богаты витамином С, стимулируют обмен веществ и мобилизуют силы. Сочетание грейпфрута и мяты освежает и очищает. Грейпфрут снижает холестерин и оказывает помощь в детоксикации печени. Мята способствует пищеварению, снимает усталость и является хорошим средством от головной боли",
           ratingValue:"4.8"
         },
       ],
@@ -116,7 +107,7 @@ export const catalog = [
       cards: [
         {
           name: "МОРС ИЗ ЧЕРНОЙ СМОРОДИНЫ",
-          imgSrc1x: "/img/3sf-d1j.png",
+          imgSrc: "/img/3sf-d1j.png",
           imgSrc2x: "/img/2x/3sf-d1j__2x.png",
           webpSrc1x: "/img/webp/3sf-d1j.webp",
           webpSrc2x: "/img/webp/3sf-d1j__2x.webp",
@@ -128,7 +119,7 @@ export const catalog = [
         },
         {
           name: "МОРС ИЗ ОБЛЕПИХИ",
-          imgSrc1x: "/img/3sf-d2j.png",
+          imgSrc: "/img/3sf-d2j.png",
           imgSrc2x: "/img/2x/3sf-d2j__2x.png",
           webpSrc1x: "/img/webp/3sf-d2j.webp",
           webpSrc2x: "/img/webp/3sf-d2j__2x.webp",
@@ -140,7 +131,7 @@ export const catalog = [
         },
         {
           name: "МОРС ИЗ БРУСНИКИ",
-          imgSrc1x: "/img/3sf-d3j.png",
+          imgSrc: "/img/3sf-d3j.png",
           imgSrc2x: "/img/2x/3sf-d3j__2x.png",
           webpSrc1x: "/img/webp/3sf-d3j.webp",
           webpSrc2x: "/img/webp/3sf-d3j__2x.webp",
@@ -153,7 +144,7 @@ export const catalog = [
         },
         {
           name: "МОРС ИЗ КЛЮКВЫ",
-          imgSrc1x: "/img/3sf-d4j.png",
+          imgSrc: "/img/3sf-d4j.png",
           imgSrc2x: "/img/2x/3sf-d4j__2x.png",
           webpSrc1x: "/img/webp/3sf-d4j.webp",
           webpSrc2x: "/img/webp/3sf-d4j__2x.webp",
@@ -171,7 +162,7 @@ export const catalog = [
       cards: [
         {
           name: "CLEAR BARN СМУЗИ HEY, МИНЬОН!",
-          imgSrc1x: "/img/4ss1i.png",
+          imgSrc: "/img/4ss1i.png",
           imgSrc2x: "/img/2x/4ss1i__2x.png",
           webpSrc1x: "/img/webp/4ss1i.webp",
           webpSrc2x: "/img/webp/4ss1i__2x.webp",
@@ -183,7 +174,7 @@ export const catalog = [
         },
         {
           name: "CLEAR BARN СМУЗИ COSMOS",
-          imgSrc1x: "/img/4ss2i.png",
+          imgSrc: "/img/4ss2i.png",
           imgSrc2x: "/img/2x/4ss2i__2x.png",
           webpSrc1x: "/img/webp/4ss2i.webp",
           webpSrc2x: "/img/webp/4ss2i__2x.webp",
@@ -195,7 +186,7 @@ export const catalog = [
         },
         {
           name: "CLEAR BARN СМУЗИ MR. FLANINGO ",
-          imgSrc1x: "/img/4ss3i.png",
+          imgSrc: "/img/4ss3i.png",
           imgSrc2x: "/img/2x/4ss3i__2x.png",
           webpSrc1x: "/img/webp/4ss3i.webp",
           webpSrc2x: "/img/webp/4ss3i__2x.webp",
@@ -207,7 +198,7 @@ export const catalog = [
         },
         {
           name: "CLEAR BARN СМУЗИ SUPER GIRL",
-          imgSrc1x: "/img/4ss4i.png",
+          imgSrc: "/img/4ss4i.png",
           imgSrc2x: "/img/2x/4ss4i__2x.png",
           webpSrc1x: "/img/webp/4ss4i.webp",
           webpSrc2x: "/img/webp/4ss4i__2x.webp",
@@ -226,7 +217,7 @@ export const catalog = [
       cards: [
         {
           name: "ИЗОТОНИК POWERADE",
-          imgSrc1x: "/img/5ss-d1i.png",
+          imgSrc: "/img/5ss-d1i.png",
           imgSrc2x: "/img/2x/5ss-d1i__2x.png",
           webpSrc1x: "/img/webp/5ss-d1i.webp",
           webpSrc2x: "/img/webp/5ss-d1i__2x.webp",
@@ -238,7 +229,7 @@ export const catalog = [
         },
         {
           name: "ГИПОТоНИЧЕСКИЙ НАПИТОК Unisport",
-          imgSrc1x: "/img/5ss-d2i.png",
+          imgSrc: "/img/5ss-d2i.png",
           imgSrc2x: "/img/2x/5ss-d2i__2x.png",
           webpSrc1x: "/img/webp/5ss-d2i.webp",
           webpSrc2x: "/img/webp/5ss-d2i__2x.webp",

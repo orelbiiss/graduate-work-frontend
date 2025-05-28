@@ -13,6 +13,7 @@ export default function UpBtn(){
                 id="btn"
                 className={showBtn}
                 src='/img/UpCircle.svg'
+                alt=""
             />
         </>
     );

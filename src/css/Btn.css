@@ -1,0 +1,289 @@
+.button{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-outline{
+    position: relative;
+    padding: 16px 68px;
+    border: 2px solid var(--accent-color);
+    overflow: hidden;
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.btn-outline::before {
+    content: "";
+    position: absolute;
+    height: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: -3;
+    background: var(--accent-color);
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.btn-outline:hover{
+    color: var(--primary-fill-color);
+} 
+
+.btn-outline:hover:before {
+    bottom: 0%;
+    top: auto;
+    height: 100%;
+}
+
+
+.btn-filled{
+    position: relative;
+    padding: 16px 78px;
+    color: var(--primary-fill-color);
+    border: 2px solid var(--accent-color);
+    overflow: hidden;
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+
+.btn-filled::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    background: var(--accent-color);
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.btn-filled:hover{
+    color: var(--accent-color);
+    background-color: transparent;
+}
+
+.btn-filled:hover::before {
+    bottom: 0%;
+    top: auto;
+    height: 0;
+}
+
+.btn-filled-fullwidth{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    padding: 16px 78px;
+    text-transform: uppercase;
+    color: var(--primary-fill-color);
+    border: 2px solid var(--accent-color);
+    overflow: hidden;
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+    cursor: pointer;
+}
+
+
+.btn-filled-fullwidth::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    background: var(--accent-color);
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.btn-filled-fullwidth:hover{
+    color: var(--accent-color);
+    background-color: transparent;
+}
+
+.btn-filled-fullwidth:hover::before {
+    bottom: 0%;
+    top: auto;
+    height: 0;
+}
+
+.btn-outline,
+.btn-filled,
+.btn-filled-fullwidth{
+    border-radius: 50px;
+    font-family: TildaSansMedium;
+    font-size: 16px;
+}
+
+.btn-filled-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    margin: 50px 0px 80px;;
+    overflow: hidden;
+    z-index: 1;
+    font-family: TildaSansSemibold;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--primary-fill-color);
+    border: 2px solid var(--accent-color);
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.btn-filled-sidebar-disabled{
+    background-color: #7F7F7F;
+    font-family: TildaSansSemibold;
+    margin: 50px 0px 80px;;
+    padding: 18px;
+    border: none;
+    color: var(--primary-fill-color);
+    text-transform: uppercase;
+}
+
+.btn-filled-sidebar::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    background: var(--accent-color);
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.btn-filled-sidebar:hover {
+    color: var(--accent-color);
+    background-color: transparent;
+}
+
+.btn-filled-sidebar:hover::before{
+    bottom: 0%;
+    top: auto;
+    height: 0;
+}
+
+@media screen and  (min-width: 1800px){
+  
+    .btn-outline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 18%;
+      font-size: 20px;
+    }
+  
+    .button{
+      gap: 25px;
+    }
+  
+    .btn-filled {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 20%;
+      font-size: 20px;
+    }
+}
+  
+  
+  /* Экраны шириной больше 1600px */
+@media screen and (min-width: 1500px) and (max-width: 1799px){
+  
+    .btn-outline {
+        padding: 22px 106px;
+        font-size: 18px;
+    }
+  
+    .btn-filled {
+        padding: 22px 116px;
+        font-size: 18px;
+    }
+}
+  
+  /* Экраны шириной меньше 1024px */
+@media screen and (max-width: 1024px) {
+
+    .button {
+        flex-direction: row-reverse;
+        width: 550px;
+        padding-bottom: 40px;
+    }
+  
+    .btn-outline {
+        padding: 18px 92px;
+    }
+  
+    .btn-filled {
+        padding: 18px 102px;
+    }
+}
+  
+   /* Экраны меньше 768px */
+@media screen and (max-width: 768px) {
+
+  
+  .button {
+      width: 335px;
+  }
+  
+  .btn-outline {
+      font-size: 12px;
+      padding: 12px 50px;
+  }
+  
+  .btn-filled {
+      font-size: 12px;
+      padding: 12px 60px;
+  }
+}
+  
+  
+  /* Экраны меньше 375px */
+@media screen and (max-width: 375px) {
+  
+    .button {
+        padding-bottom: 20px;
+        width: 260px;
+    }
+  
+    .btn-outline {
+        font-size: 10px;
+        padding: 8px 35px;
+    }
+  
+    .btn-filled {
+        font-size: 10px;
+        padding: 8px 45px;
+    }
+}
+  
+  /* Экраны высотой меньше 650px, шириной от 540px до 1024px */
+@media screen and (max-height: 650px) and (max-width: 1024px) and (min-width: 540px) {
+  
+    div ~ .btn-filled,
+    div ~ .btn-outline {
+        width: 80%;
+        height: 100%;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  
+    div ~ .btn-outline {
+        grid-row: 2;
+        padding: 10px 65px;
+    }
+  
+    div ~ .btn-filled {
+        grid-area: 2 / 3;
+        padding: 10px 75px;
+    }
+  
+    .button {
+        display: none;
+    }
+}

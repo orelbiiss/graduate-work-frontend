@@ -1,92 +1,118 @@
 import Header from "../components/Header";
-import '../ProductPage.css'
+import '../css/ProductPage.css'
 import SidePanel from '../components/SideBar'
 import ProductSwiper from '../components/ProductSwiper.js'
-import { useState, useContext } from "react";
-import { CartContext } from '../layouts/CartContext';
+import { useState, useContext, useEffect } from "react";
+import { CartContext } from '../contexts/CartContext.js';
+import { useProductCard } from "../contexts/ProductCardContext.js";
+import { catalogApi } from "../api/catalog.js";
+import { useParams } from "react-router-dom";
 
 function ProductPage(){
+    const { id } = useParams();
+    const [product, setProduct] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+
+        const fetchProduct = async () => {
+          try {
+            const data = await catalogApi.getDrink(id);
+            setProduct(data);
+            console.log(data)
+          } catch (err) {
+            setError(err.message);
+          }
+        };
+        
+        fetchProduct();
+    }, [id]);
+
     return(
         <>
             <Header/>
-            <MainBlock />
+            <MainBlock product = {product}/>
             <SidePanel />
         </>
     )
 }
 
-function MainBlock(){
+function MainBlock({ product }){
 
-    const product__information = [
-        {   
-            name: "СОК ХОЛОДНОГО ОТЖИМА CITRUS 3",
-            imgSrc1x: "/img/2sj4i.png",
-            imgSrc2x: "/img/2x/2sj4i__2x.png",
-            webpSrc1x: "/img/webp/2sj4i.webp",
-            webpSrc2x: "/img/webp/2sj4i__2x.webp",
-            volumes: [500, 1000, 1500],
-            prices: [100, 150, 200],
-            ingredients: "грейпфрут свежий, мята свежая",
-            quantity: 3,
-            id: "2sj4p",
-            productDescription: "Citrus – соки богаты витамином С, стимулируют обмен веществ и мобилизуют силы.",
-            ratingValue:"4.8"
-        }
-    ]
-
-    let [CurrentVolume, setCurrentVolume] = useState(0);
-    const { addToCart, cart } =  useContext(CartContext);
+    const { addToCart, cart } = useContext(CartContext);
+    const { formatProductData } = useProductCard();
+    const [currentVolume, setCurrentVolume] = useState(null);
+    const formattedItem = formatProductData(product);
+    const { price, discountedPrice, volumePriceId } = formattedItem.getPrice(currentVolume);
+    
+    
+    // Автоматически выбираем минимальный объем при первой загрузке
+    useEffect(() => {
+        if (formattedItem.volumes.length > 0 && currentVolume === null) {
+                setCurrentVolume(formattedItem.volumes[0]);
+            }
+        }, [formattedItem, currentVolume]);
 
     // выбор объема товара
     const handleVolumeClick = (volume) => {
-        setCurrentVolume(volume)
+        setCurrentVolume(volume);
     }
+
+    const handleAddToCart = () => {
+      if (volumePriceId) {
+          addToCart(formattedItem, currentVolume);
+      }
+    }
+
+    const isInCart = cart.items.some(cartItem => 
+        cartItem.id === formattedItem?.id && 
+        cartItem.volume === currentVolume
+    );
 
     return(
         <>
             <div className="container">
                 <div className="product__image__section">
-                    <picture className="product__image__wrapper">
-                        <source
-                        className="img__product__page"
-                        type="image/webp"
-                        srcSet="img/webp/big__img__juice.webp 1x, img/webp/big__img__juice__2x.webp 2x"
-                        /> 
-                        <img
-                        className="img__product__page"
-                        srcSet= "img/big__img__juice.png 1x, /img/2x/big__img__juice__2x.png 2x"
-                        alt=""
-                        />
-                    </picture>
+                    <div className="product__image__wrapper">
+                    <img src={formattedItem?.imgSrc} alt={formattedItem?.name}/>
+                    </div>
                 </div>
                 <div className="product__info__section">
                     <div className="product__details">
                         <div>
-                            <p className="info__section__title">{product__information[0].name}</p>
-                            <p className="ingredients">Состав: {product__information[0].ingredients}</p>
+                            <p className="info__section__title">{formattedItem?.name}</p>
+                            <p className="ingredients">Состав: {formattedItem?.ingredients}</p>
                             <div className="line__volume">
-                                {product__information[0].volumes.map((volume, i) => {
+                                {formattedItem?.volumes.map((volume, i) => {
                                     return (
-                                        <div className={'volumes' + (volume !== CurrentVolume ? ' active' : '')}  key={i} onClick={() => handleVolumeClick(volume)}>
-                                            <img src="/img/bottle__svg.svg"></img>
+                                        <div className={'volumes' + (volume !== currentVolume ? ' active' : '')}  key={i} onClick={() => handleVolumeClick(volume)}>
+                                            <img src="/img/bottle__svg.svg" alt="f"></img>
                                             <p className="volumes_p">{ volume } мл</p>
                                         </div>
                                 )})}
                             </div>
                         </div>
-                        <p className="product__description">{product__information[0].productDescription}</p>
+                        <p className="product__description">{formattedItem?.productDescription}</p>
                         <div className="price__star__rating__container">
                             <div className="price">
-                                <img src="img/wallet.svg"></img>
-                                <p>{product__information[0].prices[product__information[0].volumes.indexOf(CurrentVolume)] ?? product__information[0].prices[0]} ₽</p>
+                                <img src="/img/wallet.svg" alt="f"></img>
+                                <p>
+                                    {discountedPrice < price ? (
+                                        <>
+                                            <span className="new-price">{discountedPrice} ₽</span>
+                                            <span className="item-subtotal">{price} ₽</span>
+                                        </>
+                                    ) : (
+                                        <span className="old-price">{price} ₽</span>
+                                    )}
+                                </p>
                             </div>
                             <div className="star__rating">
-                                <img src="img/Star_light.svg"></img>
-                                <p className="rating__value">{product__information[0].ratingValue}</p>
+                                <p className="rating__value">{currentVolume ? (currentVolume / 1000) : (formattedItem.volumes?.[0] / 1000 || 0)} л</p>
                             </div>
                         </div>
-                        <button className="btn__cart__add" onClick={() => addToCart(product__information[0], CurrentVolume)}>
-                            {cart.some(item => item.id === product__information[0].id) ? "Добавить еще" : "Добавить в корзину" }
+                        <button className="btn__cart__add"  onClick={handleAddToCart} >
+                            {isInCart ? "Добавить еще" : "Добавить в корзину"}
                         </button>
                     </div>
                     <ProductSwiper/>

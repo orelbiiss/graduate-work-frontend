@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import '../ContactPage.css';
+import '../css/ContactPage.css';
 import Footer from '../components/Footer';
 
 function Contact(){
@@ -27,7 +27,7 @@ function Main(){
                     адрес
                   </h5>
                   <p className="u-text u-text-custom-color-4 u-text-2">
-                    SoHo 94 Broadway St New York, NY 1001
+                    невский
                   </p>
                 </div>
               </div>
@@ -139,7 +139,7 @@ function Main(){
                           </label>
                         </div>
                         <div className="u-align-left u-form-group u-form-submit">
-                          <a href="#" className="u-active-custom-color-1 u-border-2 u-border-custom-color-1 u-btn u-btn-round u-btn-submit u-button-style u-hover-custom-color-1 u-radius-50 u-text-active-white u-text-hover-white u-white u-btn-2">
+                          <a href="#" className="btn-filled-fullwidth">
                             Подписаться
                           </a>
                         </div>
@@ -163,17 +163,17 @@ function Main(){
                     <div className="u-social-icons u-spacing-20 u-social-icons-1">
                       <a href="https://web.telegram.org/a/" className="u-social-url">
                         <span className="u-icon u-icon-circle u-social-facebook u-social-icon u-text-palette-1-base u-icon-5">
-                          <img src='img/icon__tg.svg'className="icon__tg"></img>
+                          <img src='img/icon__tg.svg'className="icon__tg" alt="tg"></img>
                         </span>
                       </a>
                       <a href="https://web.whatsapp.com/"  className="u-social-url">
                         <span className="u-icon u-icon-circle u-social-facebook u-social-icon u-text-palette-1-base u-icon-5">
-                          <img src='img/icon__wa.svg' className="icon__wa"></img>
+                          <img src='img/icon__wa.svg' className="icon__wa" alt="wa"></img>
                         </span>
                       </a>
                     <a href="https://m.vk.com/" className="u-social-url">
                       <span className="u-icon u-icon-circle u-social-facebook u-social-icon u-text-palette-1-base u-icon-5">
-                        <img src='img/icon__vk.svg' className="icon__vk"></img>
+                        <img src='img/icon__vk.svg' className="icon__vk" alt="vk"></img>
                       </span>
                     </a>
                   </div>

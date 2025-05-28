@@ -1,11 +1,11 @@
-import '../Footer.css';
+import '../css/Footer.css';
 
 function Footer(){
     return(
         <footer className="footer">
             <div className="main__info">
                 <div className="first__block">
-                    <img src="img/footer__logo.svg" />
+                    <img src="img/footer__logo.svg" alt=''/>
                 </div>
                 <div className="second__block">
                     <p className="block__title">Информация</p>
@@ -48,7 +48,7 @@ function Footer(){
                         <p className="third__block__text">+7(812)7010187</p>
                     </div>
                     <div className="e-mail">
-                        <img src='/img/Message_light.svg'/>
+                        <img src='/img/Message_light.svg' alt=''/>
                         <p className="third__block__text">zerop-spb@mail.ru</p>
                     </div>
                     <div className="working__hours">
@@ -74,13 +74,13 @@ function Footer(){
                     <p className="block__title">Социальные сети</p>
                     <div className="social__media__icons__footer">
                         <a href="https://web.telegram.org/a/">
-                            <img src='img/icon__tg.svg'className="icon__tg"></img>
+                            <img src='img/icon__tg.svg'className="icon__tg" alt='tg'></img>
                         </a>
                         <a href="https://web.whatsapp.com/">
-                            <img src='img/icon__wa.svg' className="icon__wa"></img>
+                            <img src='img/icon__wa.svg' className="icon__wa" alt='wa'></img>
                         </a>
                         <a href="https://m.vk.com/">
-                            <img src='img/icon__vk.svg' className="icon__vk"></img>
+                            <img src='img/icon__vk.svg' className="icon__vk" alt='vk'></img>
                         </a>
                     </div>
                 </div>
@@ -88,16 +88,16 @@ function Footer(){
                 <form action="#" className="form">
                 <p className="block__title">ПОДПИШИСЬ НА РАССЫЛКУ</p>
                 <div className="email__wrapper">
-                    <div className="email__field">
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="email__input"
-                    />
-                    <label htmlFor="email" className="email__label">
-                        e-mail
-                    </label>
+                    <div className="float-animate">
+                        <input
+                            type="email"
+                            id="contact-float"
+                            name="email"
+                            className="float-animate-input"
+                        />
+                        <label htmlFor="contact-float" className="float-animate-label">
+                            e-mail
+                        </label>
                     </div>
                     <div className="checkbox">
                     <input
@@ -116,7 +116,7 @@ function Footer(){
                     </label>
                     </div>
                     <button type="submit" className="form__button">
-                        <span className="text__button">подписаться</span>
+                        <span className="btn-filled-fullwidth">подписаться</span>
                     </button>
                 </div>
                 </form>

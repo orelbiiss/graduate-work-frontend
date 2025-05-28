@@ -1,0 +1,71 @@
+.profile-edit-container {
+    display: flex;
+    overflow: hidden;
+    height: 100vh;
+    margin: 100px 5%;
+    gap: 100px;
+  }
+
+  .profile-edit-container.admin {
+    margin: 0 5%;
+  }
+  
+  .profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .profile-dynamic-section {
+    flex: 1;
+    overflow-y: scroll;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 20px 10% 100px;
+  }
+
+
+  
+.profile-dynamic-section::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .profile-dynamic-section h2 {
+    font-size: 40px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+  }
+
+  .profile-dynamic-section h2 {
+    font-family: var(--font-extrabold);
+    color: var(--text-color);
+  }
+
+  .user-orders-section{
+    display: flex;
+    font-family: var(--font-semibold);
+    font-size: 28px;
+    color: var(--text-color);
+    justify-content: flex-end;
+  }
+
+  .account-management-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: var(--font-semibold);
+    font-size: 17px;
+    color: var(--text-color);
+    align-items: flex-end;
+  }
+  .section-text{
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+
+    .section-text:hover{
+        color: rgba(255, 65, 78, 0.6);
+        transition: color 0.3s ease;
+    }

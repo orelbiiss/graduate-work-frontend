@@ -1,0 +1,84 @@
+.confirmation-modal{
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 50px;
+  z-index: 101;
+  border-radius: 20px;
+}
+
+.modal-content p{
+    text-align: center;
+}
+
+.modal-content-text-bold{
+    font-family: var(--font-bold);
+    font-size: 26px;
+}
+
+.modal-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.cancel-button{
+  border: 1px solid var(--accent-color);
+  padding: 8px 48px;
+  transition: all 0.4s ease;
+}
+
+.confirm-button{
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  color: #fff;
+  padding: 8px 48px;
+  transition: all 0.4s ease;
+}
+
+.cancel-button:hover{
+  color: #fff;
+  background-color: var(--accent-color);
+}
+
+.confirm-button:hover{
+  background-color: #fff;
+  color: var(--accent-color);
+}
+
+  .confirm-button, .cancel-button {
+    font-size: 14px;
+    font-family: var(--font-bold);
+    cursor: pointer;
+  }
+
+  .modal-content-status{
+    font-size: 18px;
+    font-family: var(--font-extrabold);
+    color: var(--accent-color)
+  }
+
+
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.cancelStatusChange{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    animation: bg 0.4s ease forwards;
+    animation-direction: normal, reverse;
+}

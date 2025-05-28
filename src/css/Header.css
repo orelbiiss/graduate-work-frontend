@@ -1,0 +1,430 @@
+.header__section {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  top: 0px;
+  height: 80px;
+  padding: 0 5%;
+}
+
+.header-checkout {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+  width: 100%;
+  top: 0;
+  height: 80px;
+  padding: 0 5%;
+}
+
+.productpage-header__section{
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  top: 0px;
+  height: 80px;
+  padding: 0 5%;
+}
+
+.social__media__icons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(0.625rem, 0.337rem + 1.28vw, 1.875rem);
+  width: clamp(4.688rem, 3.923rem + 3.4vw, 8rem);
+}
+.icon__tg,
+.icon__vk,
+.icon__wa {
+  width: clamp(1.188rem, 0.616rem + 0.89vw, 1.688rem);
+  height: clamp(1.188rem, 0.616rem + 0.89vw, 1.688rem);
+  cursor: pointer;
+}
+
+.icon__tg:hover,
+.icon__wa:hover,
+.icon__vk:hover {
+  fill: var(--accent-color);
+  margin-bottom: 2px;
+}
+
+.navigation__links{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(1.563rem, 0.625rem + 4.17vw, 5.625rem);
+  font-family: TildaSansLight;
+  font-size: clamp(0.75rem, 0.663rem + 0.38vw, 1.125rem);
+  white-space: nowrap;
+}
+
+.hdr__text:hover{
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.basket__menu__icons{
+  position: relative;
+  display: flex;
+  gap: clamp(0.625rem, 0.337rem + 1.28vw, 1.875rem);
+  justify-content: flex-end;
+  width: clamp(4.688rem, 3.923rem + 3.4vw, 8rem);
+}
+.icon__menu__default,
+.icon__menu__cross {
+  display: none;
+}
+
+
+
+.burger__links{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  top: 90%;
+  width: 300px;
+  right: -12vh;
+  padding: 20px 32px;
+  box-shadow: 0 0 6px var(--accent-color);
+  border-radius: 20px;
+  background-color: #ffffff;
+  z-index: 10;
+  animation: burgerLinksAnimation 0.8s ease-in-out;
+  font-family: TildaSansLight;
+}
+
+@keyframes burgerLinksAnimation{
+  0% {
+    margin-left: 100%;
+    width: 300%;
+  }
+  100% {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+.links{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icon__basket,
+.profile__circle{
+  cursor: pointer;
+  border: 0;
+  width: 23px;
+  height: 23px;
+}
+
+.icon__basket-none{
+  display: none;
+}
+
+.count{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-fill-color);
+  top: 17px;
+  right: -8px;
+  background-color: var(--accent-color);
+  border-radius: 100px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  font-size: 8px;
+}
+
+.count:not(.active) {
+  display: none;
+}
+
+@media screen and (min-width: 1800px){
+
+  .icon__tg, .icon__vk, .icon__wa{
+    width: 25px;
+    height: 25px;
+  } 
+
+  .count{
+    top: 20px;
+    right: -11px;
+    font-size: 10px;
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* Экраны шириной больше 1600px */
+@media screen and (min-width: 1600px) and (max-width: 1799px) {
+  .header__section {
+    height: 100px;
+  }
+
+  .icon__basket,
+  .profile__circle {
+      height: 27px;
+  }
+
+}
+
+/* Экраны шириной меньше 1024px */
+@media screen and (max-width: 1024px) {
+  .icon__basket,
+  .profile__circle {
+      height: 19px;
+  }
+
+  .count {
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+    top: 13px;
+    right: -7px;
+  }
+}
+
+/* Экраны меньше 768px */
+@media screen and (max-width: 768px) {
+  .header__section {
+      height: 60px;
+  }
+
+  .social__media__icons,
+  .hdr__text,
+  .profile__circle {
+      display: none;
+  }
+
+  .logo {
+      width: 80px;
+  }
+  
+  .basket__menu__icons {
+      display: flex;
+      gap: 0;
+      justify-content: space-around;
+  }
+  
+  .icon__menu__default,
+  .icon__menu__cross,
+  .icon__basket {
+    width: 17.5px;
+    height: 19px;
+    display: block;
+      /* background-color: #2B1B1B; */
+  }
+
+  .icon__menu__default,
+  .icon__menu__cross{
+      position: relative;
+      display: flex;
+      width: 19px;
+      height: 20px;
+      flex-wrap: wrap;
+      gap: 2px;
+      overflow: hidden;
+      border: none;
+      z-index: 11;
+  }
+  
+  .icon__menu__default span,
+  .icon__menu__cross span{
+      position: absolute;
+      top: 0;
+      border-radius: 2px;
+      border: 1.4px solid var(--text-color);
+  }
+  
+  .icon__menu__default span:nth-child(1),
+  .icon__menu__cross span:nth-child(1){
+      transform-origin: right bottom;
+      
+  }
+  .icon__menu__default span:nth-child(2),
+  .icon__menu__cross span:nth-child(2){
+      left: 9.5px;
+      transform-origin: left bottom;
+  }
+  .icon__menu__default span:nth-child(3),
+  .icon__menu__cross span:nth-child(3){
+      top: 10.5px;
+      transform-origin: right top;
+  }
+  .icon__menu__default span:nth-child(4),
+  .icon__menu__cross span:nth-child(4){
+      top: 10.5px;
+      left: 9.5px;
+      transform-origin: left top;
+  }
+
+  @keyframes elem__1{
+    0%{ left: 0;
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0; }
+    100%{
+        transform: rotate(-45deg) ;
+        padding: 0px;
+        height: 10px;
+        left: 50%;
+        top: 0;
+        }
+  }
+
+  @keyframes elem__2 {
+    0%{
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0; }
+    100%{
+        transform: rotate(45deg);
+        height: 10px;
+        padding: 0px;
+        left: 50%;
+        top: 0;
+        }
+  } 
+
+  @keyframes elem__3 {
+    0%{
+        left: 0px;
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0; }
+    100%{
+        transform: rotate(45deg);
+        height: 10px;
+        padding: 0px;
+        left: 50%;
+        }
+  } 
+
+  @keyframes elem__4 {
+    0%{ 
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0; }
+    100%{
+        transform: rotate(-45deg) ;
+        padding: 0px;
+        height: 10px;
+        left: 50%;
+        }
+  }
+
+  .icon__menu__cross span:nth-child(1){
+      animation: elem__1 1s ease forwards;
+      
+  }
+  .icon__menu__cross span:nth-child(2){
+      animation: elem__2 1s ease forwards;
+  }
+  .icon__menu__cross span:nth-child(3){
+      animation: elem__3 1s ease forwards;
+  }
+  .icon__menu__cross span:nth-child(4){
+      animation: elem__4 1s ease forwards;
+  }
+
+  
+  @keyframes elem__1__reverse {
+    0% {
+        transform: rotate(-45deg);
+        padding: 0px;
+        height: 10px;
+    }
+    100% {
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0;
+    }
+  }
+  
+  @keyframes elem__2__reverse {
+    0% {
+        transform: rotate(45deg);
+        padding: 0px;
+        height: 10px;
+    }
+    100% {
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0;
+    }
+  }
+  
+  @keyframes elem__3__reverse {
+    0% {
+        transform: rotate(45deg);
+        padding: 0px;
+        height: 10px;
+    }
+    100% {
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0;
+    }
+  }
+  
+  @keyframes elem__4__reverse {
+    0% {
+        transform: rotate(-45deg);
+        padding: 0px;
+        height: 10px;
+    }
+    100% {
+        transform: rotate(0deg);
+        padding: 3.25px 3px;
+        height: 0;
+    }
+  }
+
+
+  .icon__menu__default span:nth-child(1){
+    animation: elem__1__reverse 1s ease forwards; 
+  }
+  .icon__menu__default span:nth-child(2){
+    animation: elem__2__reverse 1s ease forwards;
+  }
+  .icon__menu__default span:nth-child(3){
+    animation: elem__3__reverse 1s ease forwards;
+  }
+  .icon__menu__default span:nth-child(4){
+    animation: elem__4__reverse 1s ease forwards;
+  }
+  .count {
+    width: 12px;
+    height: 12px;
+    font-size: 6px;
+    top: 12px;
+    right: 54px;
+  } 
+}
+
+/* Экраны высотой меньше 650px, шириной от 540px до 1024px */
+@media screen and (max-height: 650px) and (max-width: 1024px) and (min-width: 540px) {
+  .logo {
+      width: 80px;
+  }
+
+  .icon__basket,
+  .profile__circle,
+  .icon__menu{
+      width: 19px;
+      height: 19px;
+  }
+}

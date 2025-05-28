@@ -1,7 +1,8 @@
 import Header from '../components/Header';
-import "../MainPage.css";  
+import "../css/MainPage.css";  
+import "../css/Btn.css"
 import React, { useContext } from 'react';
-import { CartContext } from './CartContext';
+import { CartContext } from '../contexts/CartContext';
 
 
 
@@ -38,19 +39,13 @@ function Main({ addToCart }){
           </p>
         </div>
         <div className="button">
-          <Link className="sale" to="/sale">
+          <Link className="btn-filled" to="/sale">
             АКЦИИ
           </Link>
-          <Link className="beverages" to="/catalog">
+          <Link className="btn-outline" to="/catalog">
             НАПИТКИ
           </Link>
         </div>
-        <Link className="beverages" to="/catalog">
-          НАПИТКИ
-        </Link>
-        <Link className="sale" to="/sale">
-          АКЦИИ
-        </Link>
       </section>
       <section className="second__section">
         <div className='product__1024px'>
@@ -69,7 +64,7 @@ function Main({ addToCart }){
             </picture>
           </div>
         </div>
-        <div class="square">
+        <div className="square">
           <div></div>
           <div></div>
           <div></div>
@@ -151,7 +146,7 @@ function InfoProduct() {
     return (
       <Swiper 
         slidesPerView = {1.55}
-        loop={true}
+        loop = {true}
         navigation={true}
         modules={[Navigation]}
         className="swiper__main__page">

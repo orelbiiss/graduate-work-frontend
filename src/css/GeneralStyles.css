@@ -1,0 +1,110 @@
+:root {
+    --text-color: #2B1B1B;
+    --primary-fill-color: #fff;
+    --secondary-fill-color: #F8F8F8;
+    --accent-color: #FF414D;
+    --first-complemetary-color:#FFD6D8;
+    --second-complemetary-color:#D6DFFF;
+    --font-light: TildaSansLigh;
+    --font-reg: TildaSansRegular;
+    --font-medium: TildaSansMedium;
+    --font-bold: TildaSansBold;
+    --font-semibold: TildaSansSemibold;
+    --font-extrabold: TildaSansExtraBold;
+  }
+  
+  @font-face {
+    font-family: TildaSansSemibold;
+    src: url(../fonts/TildaSans-Semibold.woff2) format("woff2");
+  }
+  @font-face{
+    font-family: TildaSansLight;
+    src: url(../fonts/TildaSans-Light.woff2) format("woff2");
+  }
+  
+  @font-face{
+    font-family: TildaSansMedium;
+    src: url(../fonts/TildaSans-Medium.woff2) format("woff2");
+  }
+  
+  @font-face {
+    font-family: TildaSansBold;
+    src: url(../fonts/TildaSans-Bold.woff2);
+  }
+
+  @font-face {
+    font-family: TildaSansExtraBold;
+    src: url(../fonts/TildaSans-ExtraBold.woff2);
+  }
+
+  @font-face{
+    font-family: TildaSansRegular;
+    src: url(../fonts/TildaSans-Regular.woff2) format("woff2");
+  }
+  
+  * {   
+    list-style-type: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-color);
+    background-color: transparent;
+    scroll-behavior: smooth;
+    cursor: default;
+    /* scrollbar-color: var(--accent-color) #ffffff00; */
+  }
+
+  .logo, a, input {
+    cursor: pointer;
+  }
+
+  
+  ::-webkit-scrollbar{
+    width: 15px;
+  }
+  
+ 
+  ::-webkit-scrollbar-thumb{
+    background-color: var(--accent-color);
+    border-radius: 100px;
+    border: 4px solid #ffffff;
+  }
+
+  input:-webkit-autofill {
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+  .btn{
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 13px;
+    z-index: 1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .none {
+    display: none;
+  }
+  
+  .btn:hover {
+    transform: scale(1.1);
+  }
+
+  @media screen and (min-width: 1600px) {
+    .btn{
+      width: 58px;
+      right: 80px;
+      bottom: 40px;
+    }
+    
+  }
+
+
+
+  

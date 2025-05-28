@@ -1,0 +1,326 @@
+
+
+.layout{
+    height: 100vh;
+    margin: 80px 5%;
+}
+
+
+.layout.admin{
+    margin: 0 5%;
+}
+
+.account-menu{
+    display: flex;
+    justify-content: space-between;
+}
+
+.personal-identification{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.personal-identificatio-txt-img{
+    display: flex;
+    gap: 20px;
+}
+
+.personal-identificatio-txt-img > img{
+    width: 100%;
+}
+
+.personal-identification-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.first-name, 
+.last-name,
+.personal-identificatio-txt-img > img {
+    cursor: pointer;
+}
+
+
+.personal-identification-text:hover .first-name,
+.personal-identification-text:hover .last-name,
+.personal-identificatio-txt-img > img:hover {
+    color: rgba(255, 65, 78, 0.6);
+    transition: color 0.3s ease;
+}
+
+.first-name, 
+.last-name, 
+.total-num-text{
+    font-family: var(--font-extrabold);
+    font-size: 30px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.total-num-num{
+    font-family: var(--font-extrabold);
+    font-size: 64px;
+    color: var(--text-color)
+}
+
+.order-monitoring{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.total-num{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    gap: 3%;
+}
+
+.status-container{
+    display: flex;
+    gap: 50px;
+}
+
+.status-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-new::before, .status-building::before,
+.status-shipping::before, .status-completed::before{
+    content: '';
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.status-new::before{
+    background-color: var(--accent-color);
+}
+
+.status-building::before{
+    background-color: var(--first-complemetary-color);
+}
+
+.status-shipping::before{
+    background-color: var(--second-complemetary-color);
+}
+
+.status-completed::before{
+    background-color: #7FFAD7;
+}
+.status-new, .status-building,
+.status-shipping, .status-completed,
+.status-num{
+    display: flex;
+    align-items: center;
+    font-family: var(--font-reg);
+    font-size: 18px;
+    color: var(--text-color)
+}
+
+.orders-header{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.orders-header > p {
+    font-family: var(--font-bold);
+    font-size: 32px;
+    color: var(--text-color)
+}
+
+
+.ant-segmented-item-label{
+    font-family: var(--font-reg);
+    font-size: 14px;
+}
+
+/* accaunt */
+
+.switcher-container {
+    position: relative;
+    display: flex;
+    width: 750px;
+}
+
+.switcher-option {
+    font-family: var(--font-bold);
+    font-size: 28px;
+    width: 375px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #b3b3b3;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.switcher-option.active {
+    color: var(--text-color);
+}
+
+/* Основной индикатор (активное состояние) */
+.switcher-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+}
+
+/* Hover-индикатор */
+.hover-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 2px;
+    background-color: var(--accent-color);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease;
+    z-index: 2;
+}
+
+/* Анимация hover для первого элемента */
+.switcher-option:nth-child(1):hover ~ .hover-indicator {
+    transform: scaleX(1) translateX(0);
+    opacity: 0.3;
+}
+
+/* Анимация hover для второго элемента */
+.switcher-option:nth-child(2):hover ~ .hover-indicator {
+    transform: scaleX(1) translateX(100%);
+    opacity: 0.3;
+}
+
+/* Позиции активного индикатора */
+.switcher-option:nth-child(1).active ~ .switcher-indicator {
+    transform: translateX(0);
+}
+
+.switcher-option:nth-child(2).active ~ .switcher-indicator {
+    transform: translateX(100%);
+}
+
+
+.drinks-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(160px, min(240px, 15%)), 1fr));
+    gap: 50px;
+    margin-top: 50px;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 50px;
+}
+
+.orders-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 50px;
+    margin-top: 50px;
+    width: 100%;
+    justify-content: center;
+}
+
+:where(.css-dev-only-do-not-override-240cud).ant-pagination{
+    justify-content: center;
+    align-items: start;
+    margin-top: 50px;
+    height: 80px;
+}
+
+:where(.css-dev-only-do-not-override-240cud).ant-pagination .ant-pagination-item-active a {
+    color: var(--accent-color);
+}
+
+:where(.css-dev-only-do-not-override-240cud).ant-pagination .ant-pagination-item-active {
+    border-color: var(--accent-color);
+}
+
+.anticon svg{
+    cursor: pointer;
+}
+@media screen and (min-width: 1800px){
+    .drinks-grid {
+       
+        gap: 80px;
+    }
+
+}
+
+/* Экраны шириной больше 1600px */
+@media screen and (min-width: 1600px) and (max-width: 1799px) {
+    .drinks-grid{  
+        gap: 60px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .drinks-grid{ 
+        grid-template-columns: repeat(auto-fill, minmax(max(160px, min(280px, 15%)), 1fr)); 
+        gap: 60px;
+    }
+}
+
+/* Экраны шириной меньше 1024px */
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 880px) {
+
+}
+
+/* Экраны меньше 768px */
+@media screen and (max-width: 768px) {
+    .drinks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(max(120px, min(280px, 10%)), 1fr));
+        gap: 30px;
+    }
+}
+
+/* Экраны меньше 425px */
+@media screen and (max-width: 425px) {
+    .drinks-grid {
+        grid-template-columns: repeat(2, minmax(max(120px, min(140px, 15%)), 1fr));
+        gap: 30px;
+      }
+
+    .main-block-wrapper.mini{
+        margin-bottom: 25px;
+    }
+}
+
+/* Экраны меньше 375px */
+@media screen and (max-width: 375px) {
+    .drinks-grid {
+        grid-template-columns: repeat(2, minmax(max(120px, min(140px, 15%)), 1fr));
+      }
+
+      .volume.mini {
+        padding: 5px clamp(0.188rem, -0.813rem + 5vw, 0.313rem);
+        font-size: clamp(0.375rem, -1.125rem + 7.5vw, 0.563rem);
+    }
+}
+

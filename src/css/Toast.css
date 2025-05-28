@@ -1,0 +1,67 @@
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .toast {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 18px 16px 18px 20px;
+    background: rgba(30, 30, 30, 0.85); /* Темный полупрозрачный фон */
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    width: 300px;
+    backdrop-filter: blur(8px);
+    border-left: 4px solid #4CAF50; 
+    animation: slide-in 0.3s ease-out, fade-out 0.5s ease-in 2.5s forwards;
+    font-family: var(--font-medium);
+  }
+
+  .toast-icon {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    margin-right: 12px;
+  }
+  
+  .toast-message {
+    color: #fff;
+  }
+  
+  /* Цвета полос для разных типов тостов */
+  .toast.success {
+    border-left-color:  #7FFAD7;
+  }
+  
+  .toast.error {
+    border-left-color: #F44336; /* Красный */
+  } 
+  
+  .toast.info {
+    border-left-color: var(--second-complemetary-color); /* Синий */
+  }
+  
+  /* Анимации */
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
