@@ -13,6 +13,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import { useToast } from '../components/ui/ToastProvider.js';
+import { method } from 'lodash';
+
+// Ключ для хранения данных о доставке в localStorage
+const STORAGE_KEY = 'deliveryData';
 
 function Checkout() {
   return (
@@ -129,10 +133,44 @@ function CheckoutMain() {
                 address: '',
                 storeAddressId: '',
                 openingHours: '',
-                phone: ''
+                phone: '',
+                price: 0
             }));
         }
     };
+
+    // Сохранение данных в localStorage при изменении
+    useEffect(() => {
+
+        const dataToSave = {
+            // Общие данные
+            method: orderInfo.method,
+            
+            // Данные для курьерской доставки
+            ...(orderInfo.method === 'courier' && {
+              courierData: {
+                method: orderInfo.method,
+                deliveryAddress: orderInfo.address,
+                deliveryTime: orderInfo.selectedSlot?.time_slot,
+                deliveryDate: orderInfo.date,
+                shippingPrice: orderInfo.price,
+                shippingDiscount: orderInfo.discount
+              }
+            }),
+            
+            // Данные для самовывоза
+            ...(orderInfo.method === 'pickup' && {
+              pickupData: {
+                storeAddressId: orderInfo.storeAddressId,
+                storeAddress: orderInfo.address,
+                openingHours: orderInfo.openingHours,
+                phone: orderInfo.phone
+              }
+            })
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    }, [orderInfo]);
 
     // Генерация дат на неделю вперед
     const generateDates = useCallback(() => {
@@ -545,11 +583,13 @@ function CheckoutMain() {
                         <img src='../img/line__dotted.svg' className='decorative__block' alt=""/>
                         <p className="order-detail-value">{cart.cart_total}₽</p>
                     </div>
-                    <div className="order-details-row">
-                        <p className="order-detail-label">доставка</p>
-                        <img src='../img/line__dotted.svg' className='decorative__block' alt=""/>
-                        <p className="order-detail-value">{orderInfo.priceText}</p>
-                    </div>
+                    { orderInfo.price !== 0 && 
+                        <div className="order-details-row">
+                            <p className="order-detail-label">доставка</p>
+                            <img src='../img/line__dotted.svg' className='decorative__block' alt=""/>
+                            <p className="order-detail-value">{orderInfo.priceText}</p>
+                        </div>
+                    }
                     <div className="order-details-row">
                         {cart.cart_discount > 0 && (
                             <>

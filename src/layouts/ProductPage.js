@@ -19,7 +19,6 @@ function ProductPage(){
           try {
             const data = await catalogApi.getDrink(id);
             setProduct(data);
-            console.log(data)
           } catch (err) {
             setError(err.message);
           }

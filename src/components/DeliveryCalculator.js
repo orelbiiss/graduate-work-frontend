@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAddress } from '../contexts/AddressContext';
-
-// Ключ для хранения данных о доставке в localStorage
-const STORAGE_KEY = 'deliveryCalculatorData';
 
 const DeliveryCalculator = ({ userAddress, cartTotal, onCalculated }) => {
     
