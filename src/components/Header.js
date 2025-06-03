@@ -116,7 +116,7 @@ function Header() {
             onClick={togglePanel} 
           />
           <div className={"count" + (cart.items.length ? ' active' : '')} onClick={togglePanel}>
-            {cart.items.length}
+            {cart.cart_quantity}
           </div>
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}

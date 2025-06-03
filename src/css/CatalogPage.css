@@ -27,16 +27,14 @@
   width: 135px;
 }
 
-.water,
-.fruit__drink{
+.blue-circle{
+  background: top / contain url(/public/img/Ellipse__blue.svg) no-repeat;
+}
+
+.pink-circle, .water.blue-circle{
   background: top / contain url(/public/img/Ellipse__pink.svg) no-repeat; 
 }
 
-.juice,
-.smoothie,
-.sport__drink{
-  background: top / contain url(/public/img/Ellipse__blue.svg) no-repeat;
-}
 
 .bottle{
   display: flex;

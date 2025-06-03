@@ -102,12 +102,13 @@ function PageNav({ sections, activeSection, onSectionClick }) {
     <section className="page__nav">
       <div className="page__nav__wrapper">
 
-        {sections.map((section) => {
+        {sections.map((section, index) => {
           // формирование имя класса из ID секции (удаляем префикс 'section-')
           const className = section.id.replace('section-', '');
           return (
             <NavBlock 
               name={section.title} 
+              index={index}
               className={className} 
               id={section.id}
               imgSrc={section.img_src} 
@@ -123,12 +124,15 @@ function PageNav({ sections, activeSection, onSectionClick }) {
 }
 
 // компонент отдельной кнопки секции
-function NavBlock({ name, className, imgSrc, isActive, onClick }) {
+function NavBlock({ name, className, imgSrc, isActive, onClick, index }) {
   
   const [animateOnHover, setAnimateOnHover] = useState(false);
+
+  const circleColor = index % 2 === 0 ? 'blue-circle': 'pink-circle';
+  
   
   return (
-    <div className={`${className} ${isActive ? 'active' : ''}`} onClick={onClick}>
+    <div className={`${className} ${circleColor} ${isActive ? 'active' : ''}`} onClick={onClick}>
       <div className='bottle'>
         <div className='section__link'>
           <img
