@@ -13,7 +13,7 @@ function CardToAdd({ item }) {
     const location = useLocation();
     
      // Определяем, находимся ли мы на странице напитков
-     const isDrinksPage = location.hash === '#purchased-drinks';
+     const isDrinksPage = location.pathname === '/account';
     
     const formattedItem = formatProductData(item);
     const { price, discountedPrice, volumePriceId } = formattedItem.getPrice(currentVolume);

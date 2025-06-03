@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../components/Header";
 import AccauntLayout from "../components/AccaountLayout";
@@ -19,6 +19,12 @@ function Accaunt() {
     const { formatProductData } = useProductCard();
     const navigate = useNavigate();
 
+    // Добавлено: Кэш для хранения загруженных данных
+    const cacheRef = useRef({
+        orders: {},
+        drinks: {}
+    });
+
     // Адаптивный лимит элементов
     const isLargeScreen = useMediaQuery('(min-width: 1630px)');
     useEffect(() => {
@@ -28,6 +34,21 @@ function Accaunt() {
     // Загрузка данных при изменении параметров
     useEffect(() => {
         const fetchData = async () => {
+            const cacheKey = `${currentPage}-${limit}-${statusFilter}`;
+            
+            // Проверяем есть ли данные в кэше
+            if (activeView === 'orders' && cacheRef.current.orders[cacheKey]) {
+                setOrders(cacheRef.current.orders[cacheKey].data);
+                setTotalItems(cacheRef.current.orders[cacheKey].total);
+                return;
+            }
+            
+            if (activeView === 'drinks' && cacheRef.current.drinks[`${currentPage}-${limit}`]) {
+                setDrinks(cacheRef.current.drinks[`${currentPage}-${limit}`].data);
+                setTotalItems(cacheRef.current.drinks[`${currentPage}-${limit}`].total);
+                return;
+            }
+
             setLoading(true);
             try {
                 if (activeView === 'orders') {
@@ -36,11 +57,26 @@ function Accaunt() {
                         limit,
                         status: statusFilter === 'all' ? 'all' : statusFilter
                     });
+                    
+                    // Сохраняем в кэш
+                    cacheRef.current.orders[cacheKey] = {
+                        data: response.orders,
+                        total: response.total
+                    };
+                    
                     setOrders(response.orders);
                     setTotalItems(response.total);
                 } else {
                     const response = await orderApi.getMyPurchasedItems({ page: currentPage, limit });
-                    setDrinks(response.drinks.map(drink => formatProductData(drink)));
+                    const formattedDrinks = response.drinks.map(drink => formatProductData(drink));
+                    
+                    // Сохраняем в кэш
+                    cacheRef.current.drinks[`${currentPage}-${limit}`] = {
+                        data: formattedDrinks,
+                        total: response.total
+                    };
+                    
+                    setDrinks(formattedDrinks);
                     setTotalItems(response.total);
                 }
             } catch (error) {
@@ -50,7 +86,7 @@ function Accaunt() {
             }
         };
         fetchData();
-    }, [currentPage, statusFilter, activeView, limit]);
+    }, [currentPage, statusFilter, activeView, limit, formatProductData]);
 
     // Обновление URL при смене раздела
     useEffect(() => {

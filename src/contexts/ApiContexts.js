@@ -1,4 +1,4 @@
-// src/contexts/ApiContext.js
+
 import { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { api } from '../api';
 
@@ -7,16 +7,6 @@ const ApiContext = createContext();
 export function ApiProvider({ children }) {
   const [cache, setCache] = useState({});
 
-  /**
-   * Кэширующий запрос
-   * @param {string} endpoint - URL endpoint
-   * @param {string} method - HTTP метод
-   * @param {object} data - Тело запроса
-   * @param {object} options - Дополнительные опции
-   * @param {boolean} options.force - Игнорировать кэш
-   * @param {number} options.ttl - Время жизни кэша в ms
-   * @returns {Promise} Результат запроса
-   */
   const cachedRequest = useCallback(async (
     endpoint,
     method = 'GET',

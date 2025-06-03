@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AccauntLayout from "../components/AccaountLayout";
 import { adminApi } from '../api/admin';
 import { useMediaQuery } from 'usehooks-ts';
@@ -14,8 +14,14 @@ function AdminDashboard() {
     const [statusFilter, setStatusFilter] = useState('all');
     const [orders, setOrders] = useState([]);
     const [totalOrders, setTotalOrders] = useState(0);
-    const [ limit, setLimit ] = useState(9);
+    const [limit, setLimit] = useState(9);
     const [loading, setLoading] = useState(false);
+
+    // Кэш для хранения данных
+    const cacheRef = useRef({
+        stats: null,
+        orders: {}
+    });
 
     // Адаптивный лимит элементов
     const isLargeScreen = useMediaQuery('(min-width: 1630px)');
@@ -26,10 +32,24 @@ function AdminDashboard() {
     // Получение статистики
     const fetchStats = async () => {
         try {
+            // Проверяем кэш перед запросом
+            if (cacheRef.current.stats) {
+                setActiveOrdersCount(cacheRef.current.stats.counts);
+                setStatusCounts(cacheRef.current.stats.statusCounts);
+                return;
+            }
+
             const [counts, statusCountsData] = await Promise.all([
                 adminApi.getActiveOrdersCount(),
                 adminApi.getOrdersCountByStatus()
             ]);
+            
+            // Сохраняем в кэш
+            cacheRef.current.stats = {
+                counts,
+                statusCounts: statusCountsData
+            };
+            
             setActiveOrdersCount(counts);
             setStatusCounts(statusCountsData);
         } catch (error) {
@@ -39,6 +59,15 @@ function AdminDashboard() {
 
     // Получение заказов
     const fetchOrders = async () => {
+        const cacheKey = `${currentPage}-${limit}-${statusFilter}`;
+        
+        // Проверяем кэш перед запросом
+        if (cacheRef.current.orders[cacheKey]) {
+            setOrders(cacheRef.current.orders[cacheKey].data);
+            setTotalOrders(cacheRef.current.orders[cacheKey].total);
+            return;
+        }
+
         setLoading(true);
         try {
             const response = await adminApi.getAllOrders({
@@ -46,6 +75,13 @@ function AdminDashboard() {
                 limit: limit,
                 status: statusFilter === 'all' ? 'all' : statusFilter
             });
+            
+            // Сохраняем в кэш
+            cacheRef.current.orders[cacheKey] = {
+                data: response.orders,
+                total: response.total
+            };
+            
             setOrders(response.orders);
             setTotalOrders(response.total);
         } catch (error) {
@@ -55,14 +91,21 @@ function AdminDashboard() {
         }
     };
 
+    // Загрузка данных при изменении параметров
     useEffect(() => {
         fetchStats();
+    }, []);
+
+    useEffect(() => {
         fetchOrders();
-    }, [currentPage, statusFilter]);
+    }, [currentPage, statusFilter, limit]);
 
     const handleStatusChange = async (orderId, newStatus) => {
         try {
             await adminApi.updateOrderStatus(orderId, newStatus);
+            // Инвалидируем кэш после изменения статуса
+            cacheRef.current.stats = null;
+            cacheRef.current.orders = {};
             await Promise.all([fetchStats(), fetchOrders()]);
         } catch (error) {
             console.error('Ошибка обновления статуса:', error);
