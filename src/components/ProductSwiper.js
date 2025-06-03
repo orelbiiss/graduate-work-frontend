@@ -47,19 +47,44 @@ function ProductSwiper(){
   ]);
   
   // Загрузка случайных напитков при монтировании
-  useEffect(() => {
+    useEffect(() => {
     const loadRandomDrinks = async () => {
       try {
+        const cacheKey = 'randomProductsCache';
+        const cached = localStorage.getItem(cacheKey);
+        
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          const now = new Date().getTime();
+          const oneDay = 24 * 60 * 60 * 1000;
+          
+          // Если прошло меньше суток — использовать кэш
+          if (now - parsed.timestamp < oneDay) {
+            setRandomProducts(parsed.products);
+            return;
+          }
+        }
+
+        // Если нет кэша или кэш устарел — загрузить заново
         const data = await catalogApi.getRandomDrinksBySection(6);
         const sectionKey = Object.keys(data)[0];
         const drinks = data[sectionKey]?.drinks || [];
-        setRandomProducts(drinks);;
+
+        setRandomProducts(drinks);
+        
+        // Сохранить в кэш с текущим временем
+        localStorage.setItem(cacheKey, JSON.stringify({
+          timestamp: new Date().getTime(),
+          products: drinks
+        }));
       } catch (err) {
         setError(err.message);
-      } 
+      }
     };
+
     loadRandomDrinks();
   }, []);
+
   
   const swiper = randomProducts.map((product, i) => {
     const formattedProduct = formatProductData(product);
