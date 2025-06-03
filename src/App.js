@@ -95,11 +95,11 @@ function App() {
           <ApiProvider>
             <UserProvider>
               <AddressProvider>
-                <CartContextProvider>
-                  <ProductCardProvider> 
+                <ProductCardProvider> 
+                  <CartContextProvider>
                     <RouterProvider router={router} />
-                  </ProductCardProvider>
-                </CartContextProvider>
+                  </CartContextProvider>
+                </ProductCardProvider>
               </AddressProvider>
             </UserProvider>
           </ApiProvider>

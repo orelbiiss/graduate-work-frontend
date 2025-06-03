@@ -176,6 +176,10 @@ function ShoppingCartCard({ item, setPanelOpen, panelOpen }) {
     const isSmallScreen = useMediaQuery('(max-width: 930px)');
     const [showProductQuantity, setShowProductQuantity] = useState(false);
 
+    const itemSubtotal = item.price_original * item.quantity;
+    const itemTotal = item.price_final * item.quantity;
+    const itemDiscount = itemSubtotal - itemTotal;
+
     return (
         <div 
         className='cart-item'
@@ -213,14 +217,14 @@ function ShoppingCartCard({ item, setPanelOpen, panelOpen }) {
             
             {item.sale > 0 ? (
             <div className='price-selected-discounted'>
-                <p className='item-discount'>скидка {item.item_discount} ₽</p>
+                <p className='item-discount'>скидка {itemDiscount} ₽</p>
                 <div className='price-wrapper'>
-                <p className='item-subtotal'>{item.item_subtotal} ₽</p>
-                <p className='item-total'>{item.item_total} ₽</p>
+                <p className='item-subtotal'>{itemSubtotal} ₽</p>
+                <p className='item-total'>{itemTotal} ₽</p>
                 </div>
             </div>
             ) : (
-            <p className='price-selected'>{item.item_total} ₽</p>
+            <p className='price-selected'>{itemTotal} ₽</p>
             )}
         </div>
         </div>
