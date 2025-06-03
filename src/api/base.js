@@ -1,6 +1,4 @@
-const API_BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:8000' 
-  : 'https://graduate-work-backend.onrender.com';
+const API_BASE_URL = 'https://graduate-work-backend.onrender.com';
 
 export class ApiError extends Error {
   constructor(message, status, errors = {}) {
