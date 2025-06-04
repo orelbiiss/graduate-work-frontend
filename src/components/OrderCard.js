@@ -99,23 +99,35 @@ function OrderCard({ order, onStatusChange }) {
             <div className="order-details" onClick={handleCardClick}>
                 <p className='order-date'>{new Date(order.created_at).toLocaleDateString('ru-RU')}</p>
                 <div className="delivery-info">
-                    <p className="delivery-label">
-                        {order.delivery_type === 'pickup' ? 'самовывоз:' : 'доставка:'}
-                    </p>
-                    <p className="delivery-address">
-                        {order.delivery_type === 'pickup' && order.store_address ? (
-                            <>
-                                 {formatFullAddress(order.store_address).streetHouse}
-                                {order.store_address.opening_hours && (
-                                    <span className="opening-hours">, Режим работы: {order.store_address.opening_hours}</span>
-                                )}
-                            </>
-                        ) : order.address ? (
-                            formatFullAddress(order.address).streetHouse
-                        ) : (
-                            'Адрес не указан'
-                        )}
-                    </p>
+                    <div className='delivery-address-container'>
+                        <p className="delivery-label">
+                            {order.delivery_type === 'pickup' ? 'самовывоз:' : 'доставка:'}
+                        </p>
+                        <p className="delivery-address">
+                            {order.delivery_type === 'pickup' && order.store_address ? (
+                                    formatFullAddress(order.store_address).streetHouse
+                            ) : order.address ? (
+                                    formatFullAddress(order.address).streetHouse
+
+                            ) : (
+                                'Адрес не указан'
+                            )}
+                        </p>
+                    </div>
+                    {order.address ?
+                    <div className='delivery-address-container'>
+                        <p className='delivery-label'>дата и время доставки: </p>
+                        <p className="delivery-address">
+                            {new Date(order.created_at).toLocaleDateString('ru-RU', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            })} - {order.delivery_time}
+                        </p>
+                    </div> : order.store_address.opening_hours && (
+                            <span className="opening-hours"><span className='delivery-label'>режим работы:</span> {order.store_address.opening_hours}</span>
+                        )
+                    }
                 </div>
                 <div className="product-thumbnails">
                     <Swiper

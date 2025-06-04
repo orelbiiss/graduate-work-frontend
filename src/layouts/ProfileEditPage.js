@@ -61,10 +61,7 @@ function ProfileEditPage({ showDetailsOrder }) {
         } catch (error) {
             console.error('Ошибка при выходе:', error);
         } 
-    };
-
-    console.log(showDetailsOrder)
-      
+    };  
 
     return (
       <>
