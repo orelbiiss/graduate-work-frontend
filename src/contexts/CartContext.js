@@ -5,25 +5,21 @@ import { useUser } from './UserContext';
 export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
-
-  // Состояние корзины
   const [cart, setCart] = useState({
     id: null,
     user_id: null,
-    cart_discount: null,
-    cart_subtotal: null,
-    cart_total: null,
-    cart_quantity: null,
+    cart_discount: 0,
+    cart_subtotal: 0,
+    cart_total: 0,
+    cart_quantity: 0,
     items: []
   });
   const [isLoginWindowOpen, setLoginWindowOpen] = useState(false);
   const [error, setError] = useState(null);
   const { user } = useUser();
 
-  // загрузка корзины пользователя с сервера
   const fetchCart = useCallback(async () => {
     try {
-      
       const response = await cartApi.getCart();
       setCart({
         id: response?.id || 'guest',
@@ -40,85 +36,187 @@ function CartContextProvider({ children }) {
       } else {
         setError(err.message);
       }
-    } 
+    }
   }, []);
 
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
 
-  // Автоматическая загрузка при изменении пользователя
   useEffect(() => {
     if (!user || user.role === 'admin') return;
-      fetchCart();
-      setLoginWindowOpen(false);
+    fetchCart();
+    setLoginWindowOpen(false);
   }, [fetchCart, user]);
 
-  // добавление товара в корзину 
   const addToCart = async (item, volume) => {
     try {
-
-      // определение выбранного объема
       const selectedVolume = volume === 0 ? item.volumes[0] : volume;
-      console.log(item.volumes[0])
       const volumePrice = item.volumePrices.find(vp => vp.volume === selectedVolume);
 
+      // Оптимистичное обновление
+      setCart(prevCart => {
+        const existingItemIndex = prevCart.items.findIndex(
+          cartItem => cartItem.drink_volume_price_id === volumePrice.id
+        );
+
+        let newItems;
+        if (existingItemIndex >= 0) {
+          newItems = [...prevCart.items];
+          newItems[existingItemIndex] = {
+            ...newItems[existingItemIndex],
+            quantity: newItems[existingItemIndex].quantity + 1
+          };
+        } else {
+          newItems = [
+            ...prevCart.items,
+            {
+              id: Date.now().toString(),
+              drink_volume_price_id: volumePrice.id,
+              drink_id: item.id,
+              drink_name: item?.name,
+              img_src: item?.image, // добавлено для карточки
+              ingredients: item.ingredients, // добавлено для карточки
+              volume: selectedVolume,
+              price: volumePrice.price,
+              price_original: volumePrice.price, // добавлено для карточки
+              price_final: volumePrice.price, // добавлено для карточки
+              sale: 0, // добавлено для карточки
+              quantity: 1,
+              subtotal: volumePrice.price
+            }
+          ];
+        }
+
+        const newQuantity = prevCart.cart_quantity + 1;
+        const newSubtotal = prevCart.cart_subtotal + volumePrice.price;
+        const newTotal = newSubtotal - (prevCart.cart_discount || 0);
+
+        return {
+          ...prevCart,
+          items: newItems,
+          cart_quantity: newQuantity,
+          cart_subtotal: newSubtotal,
+          cart_total: newTotal
+        };
+      });
 
       const requestData = {
         drink_volume_price_id: volumePrice.id,
         quantity: 1
       };
 
-      // отправление запроса с обновлением корзины
       await cartApi.addToCart(requestData);
-      await fetchCart(); 
+      await fetchCart(); // Синхронизация с сервером после успешного запроса
     } catch (err) {
+      // Откат изменений при ошибке
+      fetchCart();
       setError(err.message);
       if (err.response?.status === 401) {
         setLoginWindowOpen(true);
       }
-    } 
+    }
   };
 
-  // Уменьшение количества товара на 1 единицу
   const removeOneItem = async (item) => {
     try {
-      
-      // Используем специальный эндпоинт для уменьшения количества
+      // Оптимистичное обновление
+      setCart(prevCart => {
+        const itemIndex = prevCart.items.findIndex(cartItem => cartItem.id === item.id);
+        if (itemIndex === -1) return prevCart;
+
+        const newItems = [...prevCart.items];
+        const currentItem = newItems[itemIndex];
+
+        if (currentItem.quantity <= 1) {
+          return prevCart; // Для полного удаления используем removeFromCart
+        }
+
+        newItems[itemIndex] = {
+          ...currentItem,
+          quantity: currentItem.quantity - 1,
+          subtotal: currentItem.price * (currentItem.quantity - 1)
+        };
+
+        const newQuantity = prevCart.cart_quantity - 1;
+        const newSubtotal = prevCart.cart_subtotal - currentItem.price;
+        const newTotal = newSubtotal - (prevCart.cart_discount || 0);
+
+        return {
+          ...prevCart,
+          items: newItems,
+          cart_quantity: newQuantity,
+          cart_subtotal: newSubtotal,
+          cart_total: newTotal
+        };
+      });
+
       await cartApi.decrementItem(item.id);
       await fetchCart();
     } catch (err) {
+      fetchCart();
       setError(err.message);
       if (err.response?.status === 401) {
         setLoginWindowOpen(true);
       }
-    } 
+    }
   };
 
-  // Полное удаление позиции из корзины (независимо от количества)
-  const removeFromCart = async ( item ) => {
+  const removeFromCart = async (item) => {
     try {
+      // Оптимистичное обновление
+      setCart(prevCart => {
+        const itemIndex = prevCart.items.findIndex(cartItem => cartItem.id === item.id);
+        if (itemIndex === -1) return prevCart;
+
+        const removedItem = prevCart.items[itemIndex];
+        const newItems = prevCart.items.filter(cartItem => cartItem.id !== item.id);
+
+        const newQuantity = prevCart.cart_quantity - removedItem.quantity;
+        const newSubtotal = prevCart.cart_subtotal - removedItem.subtotal;
+        const newTotal = newSubtotal - (prevCart.cart_discount || 0);
+
+        return {
+          ...prevCart,
+          items: newItems,
+          cart_quantity: newQuantity,
+          cart_subtotal: newSubtotal,
+          cart_total: newTotal
+        };
+      });
+
       await cartApi.removeCartItem(item);
       await fetchCart();
     } catch (err) {
+      fetchCart();
       setError(err.message);
-    } 
+    }
   };
 
-  // полная очистка корзины 
   const clearCart = async () => {
     try {
+      // Оптимистичное обновление
+      setCart(prevCart => ({
+        ...prevCart,
+        items: [],
+        cart_quantity: 0,
+        cart_subtotal: 0,
+        cart_total: 0,
+        cart_discount: 0
+      }));
+
       await cartApi.clearCart();
       await fetchCart();
     } catch (err) {
+      fetchCart();
       setError(err.message);
-    } 
+    }
   };
 
   return (
     <CartContext.Provider value={{
       cart,
-      fetchCart, 
+      fetchCart,
       addToCart,
       removeOneItem,
       removeFromCart,
