@@ -14,6 +14,7 @@ function RegistrationForm({ initialData = null }) {
   const [originalData, setOriginalData] = useState(initialData);
   const { user, setUser } = useUser();
   const { showToast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const { formData, errors, isSubmitting, handleChange, handleSubmit, setFormData, handlePhoneChange } = useForm({
@@ -27,7 +28,7 @@ function RegistrationForm({ initialData = null }) {
     password: '',
     confirm_password: ''
   }, async (formData) => {
-    
+    setIsLoading(true);
     
     // Валидация
     if (!/^\+7\d{10}$/.test(formData.phone)) {
@@ -104,8 +105,9 @@ function RegistrationForm({ initialData = null }) {
         }
       } catch (error) {
         throw error;
-
-      }
+      } finally {
+        setIsLoading(false);
+    }
     }      
   )
 
@@ -212,9 +214,12 @@ function RegistrationForm({ initialData = null }) {
           className='btn-filled-sidebar'
           disabled={isSubmitting}
         >
-          {originalData ? 'Сохранить изменения' : 
-          'Зарегистрироваться'
-          }
+          {isLoading ? (
+    
+            originalData ? 'Сохранение...' : 'Регистрация...'
+          ) : (
+            originalData ? 'Сохранить изменения' : 'Зарегистрироваться'
+          )}
         </button>
       </div>
     </form>

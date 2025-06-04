@@ -52,9 +52,9 @@ function ProfileEditPage({ showDetailsOrder }) {
             await authApi.signOut(); // Отправляем запрос на выход
             setUser(null); // Очищаем данные пользователя из контекста
             Cookies.remove('accessToken'); // Удаляем токен из куки
-            localStorage.removeItem('user');
-            localStorage.removeItem('address'); // Удаляем данные пользователя из локального хранилища
-            localStorage.removeItem("deliveryCalculatorData");
+            localStorage.removeItem('user'); // Удаляем данные пользователя из локального хранилища
+            localStorage.removeItem('address');
+            localStorage.removeItem("deliveryData");
             setRegionCity({ region: '', city: '' });
             setAddressQuery('');
             navigate('/'); // Перенаправляем на страницу входа

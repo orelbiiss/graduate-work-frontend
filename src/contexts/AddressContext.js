@@ -450,6 +450,9 @@ const DEFAULT_WORKING_HOURS = WEEK_DAYS.reduce((acc, day) => ({
 
     // Загрузка начальных данных
     useEffect(() => {
+
+        if (!user?.id) return;
+        
         const loadInitialAddresses = async () => {
         const [userAddrs, storeAddrs] = await Promise.all([
             fetchAddresses('user'),

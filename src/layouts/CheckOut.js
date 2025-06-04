@@ -316,6 +316,7 @@ function CheckoutMain() {
           });
       
           navigate(`/account`);
+          localStorage.removeItem(STORAGE_KEY);
           clearCart();
           return response;
         } catch (err) {

@@ -316,10 +316,13 @@ function NewPasswordForm({ token, onSuccess, onBack }) {
 
     const navigate = useNavigate();
     const { setUser } = useUser();
+    const { showToast } = useToast();
+    const [isLoading, setIsLoading] = useState(false);
 
 
     // Функция для обработки входа
     const onSubmit = async (formData) => {
+        setIsLoading(true);
 
         try {
 
@@ -350,7 +353,9 @@ function NewPasswordForm({ token, onSuccess, onBack }) {
             errorMessage = error.message;
         }
 
-        throw new Error(JSON.stringify({ errors: { general: errorMessage } }));
+        showToast(errorMessage, 'error')
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -399,7 +404,7 @@ function NewPasswordForm({ token, onSuccess, onBack }) {
             type="submit"
             disabled={isSubmitting}
         >
-            Войти
+            {isLoading ? ('Вход...') : 'Войти'}
         </button>
         </form>
     );
