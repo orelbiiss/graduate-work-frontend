@@ -8,7 +8,7 @@ function CardToAdd({ item }) {
     const { addToCart } = useContext(CartContext);
     const { formatProductData } = useProductCard();
     const [applyHoverEffect, setApplyHoverEffect] = useState(false);
-    const [currentVolume, setCurrentVolume] = useState(null);
+    const [currentVolume, setCurrentVolume] = useState(0);
     const location = useLocation();
     
      // Определяем, находимся ли мы на странице напитков

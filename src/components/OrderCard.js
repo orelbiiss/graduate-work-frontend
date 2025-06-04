@@ -89,6 +89,7 @@ function OrderCard({ order, onStatusChange }) {
     };
 
 
+
     return (
         <>
         <div className="order-card">
@@ -124,7 +125,7 @@ function OrderCard({ order, onStatusChange }) {
                                 year: 'numeric'
                             })} - {order.delivery_time}
                         </p>
-                    </div> : order.store_address.opening_hours && (
+                    </div> : order.store_address?.opening_hours && (
                             <span className="opening-hours"><span className='delivery-label'>режим работы:</span> {order.store_address.opening_hours}</span>
                         )
                     }
