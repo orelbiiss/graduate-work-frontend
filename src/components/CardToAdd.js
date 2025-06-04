@@ -2,30 +2,32 @@ import { Link, useLocation  } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 import React, { useState, useContext } from 'react';
 import { useProductCard } from '../contexts/ProductCardContext';
-import ProductPage from '../layouts/ProductPage';
 
 function CardToAdd({ item }) {
   
     const { addToCart } = useContext(CartContext);
     const { formatProductData } = useProductCard();
     const [applyHoverEffect, setApplyHoverEffect] = useState(false);
-    const [currentVolume, setCurrentVolume] = useState(0);
+    const [currentVolume, setCurrentVolume] = useState(null);
     const location = useLocation();
     
      // Определяем, находимся ли мы на странице напитков
      const isDrinksPage = location.pathname === '/account';
     
     const formattedItem = formatProductData(item);
-    const { price, discountedPrice, volumePriceId } = formattedItem.getPrice(currentVolume);
+    const defaultVolume = formattedItem.volumes?.[0] || 0;
+    const { price, discountedPrice, volumePriceId } = formattedItem.getPrice(defaultVolume);
     
     const handleVolumeClick = (volume) => {
         setCurrentVolume(volume);
     }
 
     const handleAddToCart = () => {
+        const volumeToAdd = currentVolume ?? defaultVolume;
       if (volumePriceId) {
-          addToCart(formattedItem, currentVolume);
+          addToCart(formattedItem, volumeToAdd);
       }
+      console.log(volumeToAdd)
     }
 
     return(

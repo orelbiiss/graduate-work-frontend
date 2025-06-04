@@ -52,7 +52,6 @@ function Catalog() {
       } catch (err) {
         setError(err.message);
       }
-      console.log(sectionDrinks)
     }
     
     // прокрутка к секции с задержкой для корректного отображения

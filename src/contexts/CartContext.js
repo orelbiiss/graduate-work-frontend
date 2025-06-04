@@ -60,6 +60,7 @@ function CartContextProvider({ children }) {
 
       // определение выбранного объема
       const selectedVolume = volume === 0 ? item.volumes[0] : volume;
+      console.log(item.volumes[0])
       const volumePrice = item.volumePrices.find(vp => vp.volume === selectedVolume);
 
 
