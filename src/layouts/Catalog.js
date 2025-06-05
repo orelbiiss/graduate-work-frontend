@@ -52,39 +52,7 @@ function Catalog() {
       } catch (err) {
         setError(err.message);
       }
-    }
-
-    // Запись куки
-    function setCookie(name, value, days = 30) {
-      const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
-    }
-
-    // Чтение куки
-    function getCookie(name) {
-      const cookies = document.cookie.split('; ');
-      for (const cookie of cookies) {
-        const [cookieName, cookieValue] = cookie.split('=');
-        if (cookieName === name) return cookieValue;
-      }
-      return null;
-    }
-
-    // Проверяем, доступны ли cookies
-    // Проверка поддержки кук
-    function testCookies() {
-      try {
-        setCookie('test_cookie', '1', 1/1440); // Кука на 1 минуту
-        return getCookie('test_cookie') === '1';
-      } catch (e) {
-        console.error('Cookies отключены!');
-        return false;
-      }
-    }
-
-    if (!testCookies()) {
-      alert('Пожалуйста, включите cookies в настройках браузера');
+      console.log(sectionDrinks)
     }
     
     // прокрутка к секции с задержкой для корректного отображения

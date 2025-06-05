@@ -13,8 +13,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Состояние для хранения данных о пользователе
   const [loading, setLoading] = useState(true); // Состояние для отслеживания загрузки данных
 
-
-  // Проверка токена при загрузке приложения
   useEffect(() => {
 
     // 1. Достаём сохранённого пользователя (если есть)
@@ -34,12 +32,12 @@ export const UserProvider = ({ children }) => {
 
           // 3. Если роль есть → токен валидный, оставляем данные как есть
           if (role) {
-            setUser(savedUser);
+            setUser(savedUser); // Просто берём данные из localStorage
           } else {
-            throw new Error('Токен невалиден');
+            throw new Error('Token invalid');
           }
         } catch (verifyError) {
-          console.warn('Срок действия токена доступа истек', verifyError);
+          console.warn('Access token expired, trying to refresh...', verifyError);
 
           try {
             // 4. Пытаемся обновить токен
@@ -48,23 +46,23 @@ export const UserProvider = ({ children }) => {
             // 5. После обновления токена снова проверяем пользователя
             const { role } = await authApi.checkAuth();
 
-            // 6. Если роль есть → токен валидный, оставляем данные как есть
+            // 6. После обновления токена снова проверяем пользователя
             if (role) {
-              setUser(savedUser);
+              setUser(savedUser); // Просто берём данные из localStorage
             } else {
-
-              // Токен невалидный → удаляем всё
               removeUserFromLocalStorage();
               setUser(null);
             }
           } catch (refreshError) {
-            console.error('Не удалось обновить токен:', refreshError);
+            // Токен невалидный → удаляем всё
+            console.error('Token refresh failed:', refreshError);
             removeUserFromLocalStorage();
             setUser(null);
           }
         }
       } catch (error) {
-        console.error('Непредвиденная ошибка:', error);
+        // Ошибка сети или сервера → считаем токен невалидным
+        console.error('Unexpected error:', error);
         removeUserFromLocalStorage();
         setUser(null);
       } finally {
