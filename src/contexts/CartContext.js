@@ -75,13 +75,13 @@ function CartContextProvider({ children }) {
               drink_volume_price_id: volumePrice.id,
               drink_id: item.id,
               drink_name: item?.name,
-              img_src: item?.image, // добавлено для карточки
-              ingredients: item.ingredients, // добавлено для карточки
+              img_src: item?.image,
+              ingredients: item.ingredients, 
               volume: selectedVolume,
               price: volumePrice.price,
-              price_original: volumePrice.price, // добавлено для карточки
-              price_final: volumePrice.price, // добавлено для карточки
-              sale: 0, // добавлено для карточки
+              price_original: volumePrice.price,
+              price_final: volumePrice.price,
+              sale: 0,
               quantity: 1,
               subtotal: volumePrice.price
             }

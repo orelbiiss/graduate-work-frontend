@@ -16,9 +16,10 @@ export const UserProvider = ({ children }) => {
 
   // Проверка токена при загрузке приложения
   useEffect(() => {
+
+    // 1. Достаём сохранённого пользователя (если есть)
     const checkTokenValidity = async () => {
       try {
-        // 1. Достаём сохранённого пользователя (если есть)
         const savedUser = getUserFromLocalStorage();
         if (!savedUser) {
           setUser(null);
@@ -26,20 +27,44 @@ export const UserProvider = ({ children }) => {
           return;
         }
 
-        // 2. Проверяем токен (ждём ответа от /auth/verify)
-        const { role } = await authApi.checkAuth(); // Важно: endpoint возвращает { role }
+        try {
 
-        // 3. Если роль есть → токен валидный, оставляем данные как есть
-        if (role) {
-          setUser(savedUser); // Просто берём данные из localStorage
-        } else {
-          // Токен невалидный → удаляем всё
-          removeUserFromLocalStorage();
-          setUser(null);
+          // 2. Пытаемся проверить текущий access-токен
+          const { role } = await authApi.checkAuth();
+
+          // 3. Если роль есть → токен валидный, оставляем данные как есть
+          if (role) {
+            setUser(savedUser);
+          } else {
+            throw new Error('Токен невалиден');
+          }
+        } catch (verifyError) {
+          console.warn('Срок действия токена доступа истек', verifyError);
+
+          try {
+            // 4. Пытаемся обновить токен
+            await authApi.refreshToken();
+
+            // 5. После обновления токена снова проверяем пользователя
+            const { role } = await authApi.checkAuth();
+
+            // 6. Если роль есть → токен валидный, оставляем данные как есть
+            if (role) {
+              setUser(savedUser);
+            } else {
+
+              // Токен невалидный → удаляем всё
+              removeUserFromLocalStorage();
+              setUser(null);
+            }
+          } catch (refreshError) {
+            console.error('Не удалось обновить токен:', refreshError);
+            removeUserFromLocalStorage();
+            setUser(null);
+          }
         }
       } catch (error) {
-        // Ошибка сети или сервера → считаем токен невалидным
-        console.error('Token check failed:', error);
+        console.error('Непредвиденная ошибка:', error);
         removeUserFromLocalStorage();
         setUser(null);
       } finally {
@@ -49,6 +74,7 @@ export const UserProvider = ({ children }) => {
 
     checkTokenValidity();
   }, []);
+
 
   return (
     <UserContext.Provider value={{ user, setUser, loading }}>

@@ -582,7 +582,7 @@ function CheckoutMain() {
                     <div className="order-details-row">
                         <p className="order-detail-label">стоимость продуктов</p>
                         <img src='../img/line__dotted.svg' className='decorative__block' alt=""/>
-                        <p className="order-detail-value">{cart.cart_total}₽</p>
+                        <p className="order-detail-value">{cart.cart_subtotal}₽</p>
                     </div>
                     { orderInfo.price !== 0 && 
                         <div className="order-details-row">

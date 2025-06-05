@@ -36,6 +36,9 @@ export const authApi = {
     token: token 
   }),
 
+  // Обновление токена
+  refreshToken: () => apiRequest('/auth/refresh', 'POST', null, null, true),
+
   // Проверка, верифицирован ли email
   checkEmailVerification: (email) => apiRequest('/auth/check-verification', 'GET', null, { email }),
 };

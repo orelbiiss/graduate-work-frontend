@@ -85,7 +85,7 @@
 
 .content{
     position: relative;
-    margin: 60px 0 80px;
+    margin: 60px 0 0;
 }
 
 .main{
@@ -575,7 +575,7 @@
     }
 
     .content{
-        padding: 80px clamp(1.875rem, 0.536rem + 6.7vw, 3.75rem) 60px;
+        padding: 80px clamp(1.875rem, 0.536rem + 6.7vw, 3.75rem) 0;
     }
 
     .main{
@@ -693,10 +693,12 @@
     }
 }
 
-
 @media screen and (max-width: 320px) {
     .text__block__title {
         font-size: 46px;
+    }
+    .content {
+        padding: 30px clamp(1.875rem, 0.536rem + 6.7vw, 3.75rem) 0;
     }
 }
 

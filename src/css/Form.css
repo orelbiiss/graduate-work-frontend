@@ -166,3 +166,19 @@ input#male:checked+.label__reg::before{
         width: 85%;
     }
 }
+
+@media screen and (max-width: 455px) {
+  .registration__title{
+    font-size: 30px;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .registration__title{
+    font-size: 25px;
+  }
+  .loginRegisterChoice{
+    font-size: 18px;
+  }
+}

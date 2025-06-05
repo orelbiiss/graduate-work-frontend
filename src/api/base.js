@@ -8,9 +8,8 @@ export class ApiError extends Error {
   }
 }
 
-/**
- * Универсальная функция для выполнения HTTP-запросов
- */
+// Универсальная функция для выполнения HTTP-запросов
+
 export async function apiRequest(endpoint, method = 'GET', data = null) {
   // Конфигурация запроса
   const config = {
