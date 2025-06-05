@@ -126,7 +126,7 @@ const DeliveryCalculator = ({ userAddress, cartTotal, onCalculated }) => {
                     const route = await buildRoute(userCoords, storeCoords);
                     return {
                         store,
-                        distance: (route.getLength() / 1000).toFixed(1)
+                        distance: Math.round(route.getLength() / 1000)
                     };
                 } catch {
                     return null;
@@ -185,7 +185,7 @@ const DeliveryCalculator = ({ userAddress, cartTotal, onCalculated }) => {
     };
 
     const calculatePrice = (distance, orderAmount) => {
-        const distanceNum = parseFloat(distance);
+        const distanceNum = Math.round(distance);
         
         if (distanceNum > deliveryParams.maxDistance) {
             throw new Error(`Доставка возможна только в пределах ${deliveryParams.maxDistance} км`);
