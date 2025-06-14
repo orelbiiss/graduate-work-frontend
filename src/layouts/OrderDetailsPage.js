@@ -117,14 +117,14 @@ const OrderDetailsPage = () => {
                     <div className="address-card-detail">
                         <p className="comment-label">получатель:</p>
                         <p className="customer-name">{order.customer_name}</p>
-                        <p className="address-text">
+                        <div className="address-text">
                             <p className="comment-label">адрес:</p>
                             {order.delivery_type === 'pickup' && order.store_address 
                                 ? formatFullAddress(order.store_address).fullAddress
                                 : order.address 
                                     ? order.full_address
                                     : 'Адрес не указан'}
-                        </p>
+                        </div>
                         {order.delivery_comment && (
                             <div className="delivery-comment">
                                 <span className="comment-label">комментарий курьеру:</span>
