@@ -3,7 +3,8 @@
     overflow: hidden;
     height: 100vh;
     margin: 100px 5%;
-    gap: 100px;
+    gap: 50px;
+    justify-content: center;
   }
 
   .profile-edit-container.admin {
@@ -23,7 +24,8 @@
     overflow-y: scroll;
     background-color: #fff;
     border-radius: 16px;
-    padding: 20px 10% 100px;
+    max-width: 780px;
+    padding: 20px 100px 100px;
   }
 
 
@@ -69,3 +71,21 @@
         color: rgba(255, 65, 78, 0.6);
         transition: color 0.3s ease;
     }
+
+
+    /* Экраны шириной меньше 1024px */
+@media screen and (max-width: 1024px) {
+  .profile-sidebar {
+      width: 250px;
+  }
+  .profile-dynamic-section {
+    padding: 20px 50px 100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-edit-container {
+      flex-direction: column;
+  }
+}
+

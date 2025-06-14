@@ -7,6 +7,10 @@
     justify-content: space-between;
 }
 
+.order-card * {
+    cursor: pointer;
+}
+
 .order-info{
     display: flex;
     justify-content: space-between;
@@ -55,7 +59,7 @@
 }
 
 .order-details{
-    margin: 10px 20px 0;
+    padding: 10px 20px 0;
 }
 
 .order-date{
@@ -160,3 +164,9 @@
 }
   
  
+@media screen and (min-width: 1800px){
+    .back-thumbnails {
+        width: 85px;
+        height: 85px;
+    }
+}

@@ -349,25 +349,6 @@ div.swiper-button-next::after{
   }
 }
 
-/* Экраны меньше 375px */
-@media screen and (max-width: 375px) {
-    
-  .first__section{
-      gap: 0;
-  }
-  .img__wrapper {
-      width: 250px;
-  }
-
-  .text__wrapper {
-      padding: 0;
-  }
-
-  .description {
-      font-size: 8px;
-  }
-}
-
 /* Экраны высотой меньше 650px, шириной от 540px до 1024px */
 @media screen and (max-height: 650px) and (max-width: 1024px) and (min-width: 540px) {
 

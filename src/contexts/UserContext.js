@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getUserFromLocalStorage, removeUserFromLocalStorage } from '../utils/localStorageUtils';
+import { getUserFromLocalStorage, removeUserFromLocalStorage, saveUserToLocalStorage } from '../utils/localStorageUtils';
 import { authApi } from '../api/auth';
 
 const UserContext = createContext();
@@ -13,6 +13,16 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Состояние для хранения данных о пользователе
   const [loading, setLoading] = useState(true); // Состояние для отслеживания загрузки данных
 
+  // Функция для обновления пользователя
+  const updateUser = (newUserData) => {
+    setUser(newUserData);
+    if (newUserData) {
+      saveUserToLocalStorage(newUserData);
+    } else {
+      removeUserFromLocalStorage();
+    }
+  };
+
   useEffect(() => {
 
     // 1. Достаём сохранённого пользователя (если есть)
@@ -23,12 +33,13 @@ export const UserProvider = ({ children }) => {
           setUser(null);
           setLoading(false);
           return;
-        }
+        } 
 
         try {
 
           // 2. Пытаемся проверить текущий access-токен
           const { role } = await authApi.checkAuth();
+          console.log(role)
 
           // 3. Если роль есть → токен валидный, оставляем данные как есть
           if (role) {
@@ -36,37 +47,37 @@ export const UserProvider = ({ children }) => {
           } else {
             throw new Error('Token invalid');
           }
+
         } catch (verifyError) {
-          console.warn('Access token expired, trying to refresh...', verifyError);
 
-          try {
-            // 4. Пытаемся обновить токен
-            await authApi.refreshToken();
+          if (verifyError.response?.status === 401) {
+            try {
+              await authApi.refreshToken();
+              
+              // 4. Повторная проверка после обновления токена
+              const { role } = await authApi.checkAuth();
+              console.log(role)
 
-            // 5. После обновления токена снова проверяем пользователя
-            const { role } = await authApi.checkAuth();
-
-            // 6. После обновления токена снова проверяем пользователя
-            if (role) {
-              setUser(savedUser); // Просто берём данные из localStorage
-            } else {
-              removeUserFromLocalStorage();
-              setUser(null);
+              // 5. Если роль есть → токен валидный, оставляем данные как есть
+              if (role) {
+                setUser(savedUser); // Просто берём данные из localStorage
+              } else {
+                throw new Error('Token invalid');
+              }
+            } catch (refreshError) {
+              console.error('Refresh token failed:', refreshError);
+              updateUser(null);
             }
-          } catch (refreshError) {
-            // Токен невалидный → удаляем всё
-            console.error('Token refresh failed:', refreshError);
-            removeUserFromLocalStorage();
-            setUser(null);
+          } else {
+            console.error('Auth check failed:', verifyError);
+            updateUser(null);
           }
         }
       } catch (error) {
-        // Ошибка сети или сервера → считаем токен невалидным
-        console.error('Unexpected error:', error);
-        removeUserFromLocalStorage();
-        setUser(null);
-      } finally {
-        setLoading(false);
+            console.error('Authentication check failed:', error);
+            updateUser(null);
+          } finally {
+            setLoading(false);
       }
     };
 
@@ -75,7 +86,7 @@ export const UserProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ user, setUser, loading }}>
+    <UserContext.Provider value={{ user, updateUser, loading }}>
       {children}
     </UserContext.Provider>
   );

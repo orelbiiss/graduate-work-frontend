@@ -315,7 +315,7 @@ function NewPasswordForm({ token, onSuccess, onBack }) {
     function LoginForm({ onPasswordResetClick }) {
 
     const navigate = useNavigate();
-    const { setUser } = useUser();
+    const { updateUser } = useUser();
     const { showToast } = useToast();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -326,7 +326,7 @@ function NewPasswordForm({ token, onSuccess, onBack }) {
 
         try {
 
-        await loginAndLoadProfile(formData.email, formData.password, setUser, navigate);
+        await loginAndLoadProfile(formData.email, formData.password, updateUser, navigate);
 
         } catch (error) {
         console.error('Login error:', error);

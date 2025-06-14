@@ -94,7 +94,7 @@
   top: 90%;
   width: 300px;
   right: -12vh;
-  padding: 20px 32px;
+  padding: 40px 52px;
   box-shadow: 0 0 6px var(--accent-color);
   border-radius: 20px;
   background-color: #ffffff;
@@ -117,7 +117,11 @@
 .links{
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+}
+
+.links a{
+  font-size: 18px;
 }
 
 .icon__basket,
@@ -214,7 +218,6 @@
   
   .basket__menu__icons {
       display: flex;
-      gap: 0;
       justify-content: space-around;
   }
   
@@ -224,7 +227,6 @@
     width: 17.5px;
     height: 19px;
     display: block;
-      /* background-color: #2B1B1B; */
   }
 
   .icon__menu__default,
@@ -273,7 +275,7 @@
   @keyframes elem__1{
     0%{ left: 0;
         transform: rotate(0deg);
-        padding: 3.25px 3px;
+        padding: 7px;
         height: 0; }
     100%{
         transform: rotate(-45deg) ;
@@ -410,7 +412,7 @@
     height: 12px;
     font-size: 6px;
     top: 12px;
-    right: 54px;
+    right: 30px;
   } 
 }
 

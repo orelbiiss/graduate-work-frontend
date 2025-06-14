@@ -9,7 +9,7 @@ export function ProtectedRoute({ children, allowedRoles, redirectTo }) {
   }, [user]);
 
   if (loading) {
-    return <div>Loading...</div>; // Можно добавить спиннер вместо этого
+    return <div>Loading...</div>; 
   }
 
   if (!user) {

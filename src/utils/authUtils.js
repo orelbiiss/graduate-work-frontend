@@ -2,13 +2,13 @@
 import { authApi } from '../api/auth';
 import { saveUserToLocalStorage } from './localStorageUtils';
 
-export async function loginAndLoadProfile(email, password, setUser, navigate) {
+export async function loginAndLoadProfile(email, password, updateUser, navigate) {
 
   const userData = await authApi.signIn(email, password);
   
   if (userData && userData.role) {
 
-    setUser(userData);
+    updateUser(userData);
     saveUserToLocalStorage(userData);
 
     // Редирект по роли

@@ -25,6 +25,7 @@ import { ToastProvider } from './components/ui/ToastProvider';
 import { PreLoaderProvider } from './contexts/PreLoaderContext';
 import { AddressProvider } from './contexts/AddressContext';
 import PreLoader from './components/PreLoader';
+import OrderDetailsPage from './layouts/OrderDetailsPage';
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <CheckOut/>
+  },
+  {
+    path: "/orders/:orderId",
+    element: <OrderDetailsPage />
   },
   {
     path: "/account",

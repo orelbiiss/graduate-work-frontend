@@ -136,6 +136,23 @@
   padding-bottom: 50px;
 }
 
+.custom-pagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px;
+}
+
+:where(.css-240cud).ant-pagination .ant-pagination-item-active a{
+  color: var(--accent-color);
+}
+
+:where(.css-240cud).ant-pagination .ant-pagination-item-active {
+    font-weight: 600;
+    background-color: #ffffff;
+    border-color: var(--accent-color);
+}
+
 
 
 @media screen and (min-width: 1800px){

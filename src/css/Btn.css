@@ -4,6 +4,8 @@
 }
 
 .btn-outline{
+    display: flex;
+    align-items: center;
     position: relative;
     padding: 16px 68px;
     border: 2px solid var(--accent-color);
@@ -251,12 +253,12 @@
   
     .btn-outline {
         font-size: 10px;
-        padding: 8px 35px;
+        padding: 12px 35px;
     }
   
     .btn-filled {
         font-size: 10px;
-        padding: 8px 45px;
+        padding: 12px 45px;
     }
 }
   

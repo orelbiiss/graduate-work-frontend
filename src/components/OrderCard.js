@@ -84,8 +84,7 @@ function OrderCard({ order, onStatusChange }) {
     };
 
     const handleCardClick = () => {
-        navigate('/account/edit')
-        setShowDetails(true);
+        navigate(`/orders/${order.id}`, { state: { order } });
     };
 
 
