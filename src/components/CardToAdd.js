@@ -58,19 +58,22 @@ function CardToAdd({ item }) {
                 <Link to={`/product/${item.id}`} className="link__cover"></Link>
             </div>
             </div>
-            {formattedItem.volumes.length > 1 && (
-                <div className="volume__section">
-                    {formattedItem.volumes.map((volume, index) => (
-                        <p 
-                            key={index} 
-                            className={`volume${volume !== currentVolume ? ' active' : ''} ${isDrinksPage ? 'mini' : ''}`} 
-                            onClick={() => handleVolumeClick(volume)}
-                        >
-                            {volume} мл
-                        </p>
-                    ))}
-                </div>
-            )}
+            <div className="volume__section">
+                {formattedItem.volumes.map((volume, index) => (
+                    <p 
+                        key={index} 
+                        className={`volume
+                        ${volume === currentVolume ? '' : 'active'}
+                        ${isDrinksPage ? 'mini' : ''}
+                        ${formattedItem.volumes.length === 1 ? 'single-volume' : ''}
+                        `} 
+                        onClick={() => handleVolumeClick(volume)}
+                    >
+                        {volume} мл
+                    </p>
+                ))}
+            </div>
+            
             <Link 
                 to="/productPage" 
                 className={`${applyHoverEffect ? 'position__name__hover' : 'position__name'} ${isDrinksPage ? 'mini' : ''}`}

@@ -99,7 +99,7 @@
   }
   
   .volume,
-  .volume__single__volume-btn{
+  .volume.single-volume{
     border: 1px solid #7F7F7F;
     border-radius: 100px;
     padding: 5px clamp(0.625rem, -0.264rem + 1.39vw, 1.125rem);
@@ -110,7 +110,7 @@
   }
 
   .volume.mini,
-  .volume__single__volume-btn{
+  .volume.single-volume.mini{
     padding: 5px 7px;
     font-size: 8px;
   }
@@ -126,10 +126,15 @@
     color: var(--accent-color);
   }
 
-  .volume__single__volume-btn{
+  .volume.single-volume,
+  .volume.single-volume.mini{
     cursor: default;
     border-color: #D0D0D0;
     color: #D0D0D0;
+  }
+
+  .volume.single-volume:hover {
+    transform: none;
   }
   
   .position__name{
@@ -196,7 +201,7 @@
 
   @media screen and (min-width: 1800px){
 
-    .volume, .volume__single__volume-btn {
+    .volume, .volume.single-volume {
         padding: 6px 18px;
         font-size: 13px;
     }
@@ -232,7 +237,7 @@
         width: 40px;
     }
 
-    .volume.mini, .volume__single__volume-btn {
+    .volume.mini, .volume.single-volume.mini {
         padding: 5px 10px;
         font-size: 10px;
     }
@@ -245,7 +250,7 @@
   /* Экраны шириной больше 1600px */
   @media screen and (min-width: 1600px) and (max-width: 1799px) {
 
-    .volume, .volume__single__volume-btn {
+    .volume, .volume.single-volume {
         padding: 6px 18px;
         font-size: 13px;
     }
@@ -286,8 +291,8 @@
 /* Экраны шириной меньше 1024px */
 @media screen and (max-width: 1024px) {
 
-    .volume,
-  .volume__single__volume-btn{
+  .volume,
+  .volume.single-volume{
     padding: 6px 11px;
     font-size: 8px;
   }
@@ -328,13 +333,13 @@
         width: 95px;
     }
     .volume,
-    .volume__single__volume-btn{
-    padding: 6px 10px;
-    font-size: 8px;
+    .volume.single-volume {
+      padding: 6px 10px;
+      font-size: 8px;
     }
 
-    .volume__section{
-    flex-wrap: wrap;
+    .volume__section {
+      flex-wrap: wrap;
     }
 }
 
@@ -385,7 +390,7 @@
   .position__name{
     margin: 6px 0;
   }
-  .volume.mini, .volume__single__volume-btn {
+  .volume.mini, .volume.single-volume.mini {
     padding: 6px clamp(0.563rem, -1.875rem + 10vw, 0.625rem);
     font-size: 8px;
 }
@@ -394,12 +399,12 @@
 /* Экраны меньше 375px */
 @media screen and (max-width: 375px) {
 
-    .volume, .volume__single__volume-btn {
+    .volume, .volume.single-volume {
         padding: 5px;
         font-size: 8px;
     }
 
-    .volume.mini, .volume__single__volume-btn {
+    .volume.mini, .volume.single-volume.mini {
         padding: 5px;
         font-size: 8px;
     }
